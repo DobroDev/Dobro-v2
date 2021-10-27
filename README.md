@@ -4,6 +4,16 @@
     <strong>A Multipurpose Discord Bot.</strong><br><br>
     <img src="https://forthebadge.com/images/badges/made-with-javascript.svg" height="30">&nbsp;
     <img src="https://forthebadge.com/images/badges/built-with-love.svg" height="30">&nbsp;
-    <a href="https://discord.gg/qD8GxsuWZ2"><img src="https://img.shields.io/discord/849624046958149633.svg?style=for-the-badge" height="30"></a>&nbsp;<br>
+    <a href="https://discord.gg/T6EKQdv6x5"><img src="https://img.shields.io/discord/849624046958149633.svg?style=for-the-badge" height="30"></a>&nbsp;<br>
 <a href="https://www.codefactor.io/repository/github/dobrodev/dobro-v2"><img src="https://www.codefactor.io/repository/github/dobrodev/dobro-v2/badge" alt="CodeFactor" /></a>
 </div>
+
+---
+**Dobro** is an open-source Discord bot written in Javascript, using the Discord.js Library. Dobro has various features like Fun commands, Moderation Commands and other useful features. Join the [Discord](https://discord.gg/T6EKQdv6x5) to try it out!
+
+## Setup
+
+Coming soon.
+
+## Contributors
+* [Nickk#7480](https://github.com/NickR69420)
