@@ -1,0 +1,29 @@
+{
+    "Bot": {
+        "token": "",
+        "prefix": ""
+    },
+    "Database": {
+        "URL": "MongoDB-URL"
+    },
+    "Embeds": {
+        "Colors": {
+            "Error": "#FDE01E"
+        }
+    },
+    "Lang": {
+        "Errors": {
+            "invalidargs": "\\❌ Invalid Arguments!"
+        },
+        "NoPerms": "You are missing the (perms) permission to run this command!",
+        "Usage": "Usage: (usage)",
+        "GeneralCommands": {
+            "Ping": {
+                "awaitMsg": "Pinging...",
+                "Response": "**Pong!** Bot Latency: ``(ping)ms`` API Latency: ``(msgping)ms``"
+            }
+        }
+    },
+    "disabledCommands": [],
+    "disabledEvents": []
+}
