@@ -1,12 +1,9 @@
 const config = require("../../config.json");
-const { Message, CommandInteraction, MessageEmbed } = require('discord.js')
 
 module.exports = {
   // Imports
   Discord: require("discord.js"),
   Client: require("../index"),
-  Message,
-  CommandInteraction,
   Embed: require("discord.js").MessageEmbed,
   Config: config.Bot,
   Database: config.Database,

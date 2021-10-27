@@ -1,5 +1,4 @@
-const Utils = require("../Modules/Utils");
-const { Client } = Utils;
+const { Client } = require("../Modules/Utils");
 
 /**
  * @param {Client} client
