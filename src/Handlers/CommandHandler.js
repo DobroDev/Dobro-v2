@@ -20,13 +20,13 @@ module.exports = async (client) => {
       const command = require(file);
 
       const Split = file.split("/");
-
       const fileName = Split[Split.length - 1];
       const directory = Split[Split.length - 2];
 
-      if (!command.name) return Load.addRow(fileName, "❌ no name.");
+      if (!command.name)
+        return Load.addRow(`${directory}/${fileName}`, "❌ no name.");
       if (!command.description)
-        return Load.addRow(fileName, "❌ no description.");
+        return Load.addRow(`${directory}/${fileName}`, "❌ no description.");
       if (!command.usage)
         return Load.addRow(`${directory}/${fileName}`, "❌ no usage");
 

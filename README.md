@@ -9,7 +9,7 @@
 </div>
 
 ---
-**Dobro** is an open-source Discord bot written in Javascript, using the Discord.js Library. Dobro has various features like Fun commands, Moderation Commands and other useful features. Join the [Discord](https://discord.gg/T6EKQdv6x5) to try it out!
+**Dobro** is an open-source Discord bot written in Javascript, using the Discord.js Library. Dobro has various features like Fun commands, Moderation commands and other useful features. Join the [Discord](https://discord.gg/T6EKQdv6x5) to try it out!
 
 ## Setup
 

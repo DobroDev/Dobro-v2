@@ -3,6 +3,7 @@ const config = require("../../config.json");
 
 const EventHandler = require("../Handlers/EventHandler");
 const CommandHandler = require("../Handlers/CommandHandler");
+const SlashHandler = require("../Handlers/SlashHandler");
 const ErrorHandler = require("../Handlers/ErrorHandler");
 
 class Dobro extends Client {
@@ -19,6 +20,7 @@ class Dobro extends Client {
   loadHandlers() {
     EventHandler(this);
     CommandHandler(this);
+    SlashHandler(this);
     ErrorHandler(this);
   }
 
