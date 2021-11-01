@@ -1,10 +1,11 @@
+const { MessageEmbed, Message } = require("discord.js");
 const config = require("../../config.json");
 
 module.exports = {
   // Imports
   Discord: require("discord.js"),
   Client: require("../index"),
-  Embed: require("discord.js").MessageEmbed,
+  Embed: MessageEmbed,
   Config: config.Bot,
   Database: config.Database,
   Embeds: config.Embeds,
@@ -12,7 +13,8 @@ module.exports = {
   disabledCommands: config.disabledCommands,
   disabledEvents: config.disabledEvents,
 
-  // Functions
+  //Functions
+
   SetupEmbed: function ({
     author,
     icon,
@@ -26,7 +28,7 @@ module.exports = {
     footericon,
     timestamp,
   }) {
-    const Embed = new this.Embed();
+    const Embed = new MessageEmbed();
 
     if (author) Embed.setAuthor(author);
     if (author && icon) Embed.setAuthor(author, icon);
@@ -35,11 +37,34 @@ module.exports = {
     if (description) Embed.setDescription(description);
     if (fields) Embed.addFields(fields);
     if (image) Embed.setImage(image);
-    if (color) Embed.setColor(color || "RANDOM");
+    if (color) {
+      Embed.setColor(color);
+    } else Embed.setColor("RANDOM");
     if (footer) Embed.setFooter(footer);
     if (footer && footericon) Embed.setFooter(footer, footericon);
     if (timestamp) {
-      if (typeof timestamp === "boolean") Embed.setTimestamp(new Date());
-    } else Embed.setTimestamp(timestamp);
-  }, 
+      if (typeof timestamp === true) {
+        Embed.setTimestamp(new Date());
+      } else Embed.setTimestamp(timestamp);
+    }
+
+    return Embed;
+  },
+
+  /**
+   *
+   * @param {Message} message
+   * @param {String[]} args
+   */
+  getUser: function (message, args) {
+    if (!message) throw new Error("No message parameter given.".bgRed);
+    if (!args) throw new Error("No Args provided".bgRed);
+    const user =
+      message.mentions.members.first() ||
+      message.guild.members.cache.get(args[0]) ||
+      message.guild.members.cache.find((c) => c.nickname || c.displayName) ||
+      message.member;
+
+    return user;
+  },
 };
