@@ -24,14 +24,19 @@
   },
   "homepage": "https://github.com/dobrodev/Dobro-v2#readme",
   "dependencies": {
+    "@sapphire/stopwatch": "^1.2.3",
+    "@sapphire/type": "^2.1.1",
     "@skyra/editable-commands": "^2.1.0",
     "ascii-table": "^0.0.9",
     "colors": "^1.4.0",
+    "consola": "^2.15.3",
     "discord.js": "^13.2.0",
     "glob": "^7.2.0",
+    "hastebin": "^0.2.1",
     "mongoose": "^6.0.12"
   },
   "devDependencies": {
-    "nodemon": "^2.0.14-alpha.1"
+    "nodemon": "^2.0.14-alpha.1",
+    "prettier": "^2.4.1"
   }
 }

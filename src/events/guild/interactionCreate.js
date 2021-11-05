@@ -40,7 +40,7 @@ module.exports = {
         command.run(client, interaction);
       }
     } catch (err) {
-      console.log("[x] Error found in interactionCreate event!".bgRed, err);
+     	client.consola.error(new Error(err));
     }
   },
 };
