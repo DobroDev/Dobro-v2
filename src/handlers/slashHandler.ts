@@ -1,6 +1,6 @@
 import { Dobro } from '../utils/client/Dobro';
 import { ApplicationCommandDataResolvable } from 'discord.js';
-import { iSlash } from '../utils/structures';
+import { iSlash } from '../structures';
 import glob from 'glob';
 import { promisify } from 'util';
 const globP = promisify(glob);

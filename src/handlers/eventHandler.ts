@@ -1,5 +1,5 @@
 import { Dobro } from '../utils/client/Dobro';
-import { Event } from '../utils/structures';
+import { Event } from '../structures';
 import { ClientEvents } from 'discord.js';
 import glob from 'glob';
 import { promisify } from 'util';

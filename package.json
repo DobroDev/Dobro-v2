@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "ascii-table3": "^0.6.2",
+    "axios": "^0.24.0",
     "colors.ts": "^1.0.20",
     "consola": "^2.15.3",
     "discord.js": "^13.3.1",

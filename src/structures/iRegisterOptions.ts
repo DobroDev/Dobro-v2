@@ -1,5 +1,5 @@
 import { ApplicationCommandDataResolvable } from 'discord.js';
-import { Dobro } from '../client/Dobro';
+import { Dobro } from '../utils/client/Dobro';
 
 export interface iRegisterOptions {
 	/** Discord Client */

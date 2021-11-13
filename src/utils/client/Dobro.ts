@@ -1,9 +1,5 @@
-import {
-	ApplicationCommandDataResolvable,
-	Client,
-	Collection,
-} from 'discord.js';
-import { iSlash, config } from '../structures/index';
+import { Client, Collection } from 'discord.js';
+import { iSlash, config } from '../../structures/index';
 import * as Utils from '../utilities';
 import consola from 'consola';
 
@@ -23,7 +19,6 @@ export class Dobro extends Client {
 	constructor() {
 		super({
 			intents: 32767,
-			partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 			presence: { status: 'idle' },
 		});
 	}
@@ -36,7 +31,7 @@ export class Dobro extends Client {
 		});
 	}
 
-	async loadModules() {
+	loadModules() {
 		eventHandler(this);
 		slashHandler(this);
 	}

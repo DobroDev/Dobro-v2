@@ -10,11 +10,24 @@ interface ConfigFile {
 	Database: {
 		URL: string;
 	};
+	Errors: {
+		inDevelopment: string;
+		noPerms: string;
+	};
 	GeneralCommands: {
 		Ping: {
 			awaitMsg: string;
 			Response: string;
 		};
+	};
+	FunCommands: {
+		RPS: {
+			Question: string;
+			InvalidPlayer: string;
+		};
+		eightball: {
+			embed: string
+		}
 	};
 }
 

@@ -1,10 +1,9 @@
-import { title } from 'process';
-import { slashCommand } from '../../utils/structures';
-import { Embed } from '../../utils/utilities';
+import { slashCommand } from '../../structures';
 
 export default new slashCommand({
 	name: 'ping',
 	description: 'Displays bot latency.',
+	permsneeded: ['SEND_MESSAGES'],
 	Development: true,
 	run: async ({ client, interaction }) => {
 		const { Ping } = client.config.GeneralCommands;
