@@ -1,12 +1,15 @@
 import {
 	Client,
-	ColorResolvable,
-	EmbedFieldData,
 	GuildEmoji,
-	HexColorString,
+	MessageActionRow,
+	MessageButton,
 	MessageEmbed,
+	TextChannel,
 } from 'discord.js';
 import { iRegisterOptions, iEmbed } from '../structures';
+import { Dobro } from './client/Dobro';
+import axios from 'axios';
+import { ExtendInteraction } from '../structures/iSlash';
 
 // Import File
 /**
@@ -45,6 +48,7 @@ export async function registerSlash({
 export function Embed({
 	author,
 	icon,
+	url,
 	thumbnail,
 	title,
 	description,
@@ -58,6 +62,7 @@ export function Embed({
 	const Embed = new MessageEmbed();
 	if (author) Embed.setAuthor(author);
 	if (author && icon) Embed.setAuthor(author, icon);
+	if (url) Embed.setURL(url);
 	if (thumbnail) Embed.setThumbnail(thumbnail);
 	if (title) Embed.setTitle(title);
 	if (description) Embed.setDescription(description);
@@ -109,48 +114,77 @@ export function formatPermission(permission: string): string {
 	return splitFixed.join(' ');
 }
 
-// Perm Check
-export const PermsObject: any = {
-	ADMINISTRATOR: 'Administrator',
-	VIEW_AUDIT_LOG: 'View Audit Log',
-	VIEW_GUILD_INSIGHTS: 'View Server Insights',
-	MANAGE_GUILD: 'Manage Server',
-	MANAGE_ROLES: 'Manage Roles',
-	MANAGE_CHANNELS: 'Manage Channels',
-	KICK_MEMBERS: 'Kick Members',
-	BAN_MEMBERS: 'Ban Members',
-	CREATE_INSTANT_INVITE: 'Create Invite',
-	CHANGE_NICKNAME: 'Change Nickname',
-	MANAGE_NICKNAMES: 'Manage Nicknames',
-	MANAGE_EMOJIS: 'Manage Emojis',
-	MANAGE_WEBHOOKS: 'Manage Webhooks',
-	VIEW_CHANNEL: 'Read Text Channels & See Voice Channels',
-	SEND_MESSAGES: 'Send Messages',
-	SEND_TTS_MESSAGES: 'Send TTS Messages',
-	MANAGE_MESSAGES: 'Manage Messages',
-	EMBED_LINKS: 'Embed Links',
-	ATTACH_FILES: 'Attach Files',
-	READ_MESSAGE_HISTORY: 'Read Message History',
-	MENTION_EVERYONE: 'Mention @everyone, @here, and All Roles',
-	USE_EXTERNAL_EMOJIS: 'Use External Emojis',
-	ADD_REACTIONS: 'Add Reactions',
-	CONNECT: 'Connect',
-	SPEAK: 'Speak',
-	STREAM: 'Video',
-	MUTE_MEMBERS: 'Mute Members',
-	DEAFEN_MEMBERS: 'Deafen Members',
-	MOVE_MEMBERS: 'Move Members',
-	USE_VAD: 'Use Voice Activity',
-	PRIORITY_SPEAKER: 'Priority Speaker',
-	MANAGE_EMOJIS_AND_STICKERS: 'Manage Emojis & Stickers',
-	MANAGE_THREADS: 'Manage Threads',
-	SEND_MESSAGES_IN_THREADS: 'Send Messages in Threads',
-	START_EMBEDDED_ACTIVITIES: 'Start Embeded Activities',
-	USE_APPLICATION_COMMANDS: 'Use Application Commands',
-	REQUEST_TO_SPEAK: 'Request to Speak',
-	USE_PUBLIC_THREADS: 'Use Public Threads',
-	CREATE_PUBLIC_THREADS: 'Create Public Threads',
-	USE_PRIVATE_THREADS: 'Use Private Threads',
-	CREATE_PRIVATE_THREADS: 'Create Private Threads',
-	USE_EXTERNAL_STICKERS: 'Use External Stickers',
-};
+/**
+ * @command Meme
+ */
+
+export async function meme(
+	client: Dobro,
+	subreddit: string,
+	interaction: ExtendInteraction
+) {
+	const { Meme } = client.config.FunCommands;
+	const { Embed } = client.utils;
+	try {
+		const response = await axios.get(
+			`https://meme-api.herokuapp.com/gimme/${subreddit}`
+		);
+		const { data } = response;
+
+		if (data.nsfw && !(interaction.channel as TextChannel).nsfw) {
+			return Embed({ description: Meme.NSFW, color: 'DARK_RED' });
+		}
+
+		return Embed({
+			title: data.title,
+			url: data.postLink,
+			image: data.url,
+			footer: `👍 ${data.ups}`,
+		});
+	} catch (error) {
+		return Embed({ description: 'The api seems to be down :(' });
+	}
+}
+
+/**
+ * @command Meme
+ */
+export async function updateMeme(
+	client: Dobro,
+	subreddit: string,
+	interaction: ExtendInteraction
+) {
+	const updateEmbed = await meme(client, subreddit, interaction);
+
+	interaction.editReply({ embeds: [updateEmbed] });
+
+	const collector = interaction.channel.createMessageComponentCollector({
+		componentType: 'BUTTON',
+		time: 120000,
+	});
+
+	collector.on('collect', async (button) => {
+		if (button.user.id !== interaction.user.id)
+			button.reply({
+				content: `That's not yours. Run /meme to get one of your own :)`,
+				ephemeral: true,
+			});
+
+		button.deferUpdate();
+		await updateMeme(client, subreddit, interaction);
+		collector.stop();
+	});
+
+	collector.on('end', async (button, i) => {
+		const disable = new MessageActionRow().addComponents(
+			new MessageButton()
+				.setCustomId('e')
+				.setLabel('Interaction Ended.')
+				.setStyle('SECONDARY')
+				.setDisabled(true)
+		);
+		if (i === 'time') {
+			interaction.editReply({ components: [disable] });
+		}
+	});
+}

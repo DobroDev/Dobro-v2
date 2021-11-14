@@ -46,6 +46,9 @@ interface ConfigFile {
 			Title: string;
 			Description: string;
 		};
+		Meme: {
+			NSFW: string;
+		};
 	};
 }
 

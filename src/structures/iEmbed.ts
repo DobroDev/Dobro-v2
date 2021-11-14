@@ -2,6 +2,7 @@ import { ColorResolvable, EmbedFieldData, HexColorString } from "discord.js";
 
 export interface iEmbed {
 	author?: string;
+	url?: string;
 	icon?: string;
 	thumbnail?: string;
 	title?: string;
