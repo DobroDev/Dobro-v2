@@ -26,8 +26,26 @@ interface ConfigFile {
 			InvalidPlayer: string;
 		};
 		eightball: {
-			embed: string
-		}
+			embed: string;
+		};
+		Math: {
+			Title: string;
+			Fields: string[];
+		};
+		Coinflip: {
+			Title: string;
+			Description: string;
+		};
+		RollDice: {
+			Rolling: string;
+			Title: string;
+			Description: string;
+			Sides: string[];
+		};
+		HowGay: {
+			Title: string;
+			Description: string;
+		};
 	};
 }
 

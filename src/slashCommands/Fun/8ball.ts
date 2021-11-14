@@ -42,7 +42,10 @@ export default new slashCommand({
 				],
 			});
 		} catch (error) {
-			interaction.reply('The api seems to be down :(');
+			interaction.reply({
+				content: 'The api seems to be down :(',
+				ephemeral: true,
+			});
 		}
 	},
 });
