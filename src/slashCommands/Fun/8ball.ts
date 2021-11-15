@@ -15,7 +15,7 @@ export default new slashCommand({
 	],
 	run: async ({ client, interaction, args }) => {
 		const { eightball } = client.config.FunCommands;
-		const { Embed, getEmoji } = client.utils;
+		const { Embed } = client.utils;
 		const getQuestion = interaction.options.getString('question');
 
 		let question = getQuestion;
@@ -43,7 +43,12 @@ export default new slashCommand({
 			});
 		} catch (error) {
 			interaction.reply({
-				content: 'The api seems to be down :(',
+				embeds: [
+					Embed({
+						presets: 'ERROR',
+						description: 'The api seems to be down :(',
+					}),
+				],
 				ephemeral: true,
 			});
 		}

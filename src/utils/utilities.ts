@@ -1,15 +1,15 @@
 import {
-	Client,
 	GuildEmoji,
 	MessageActionRow,
 	MessageButton,
 	MessageEmbed,
 	TextChannel,
 } from 'discord.js';
-import { iRegisterOptions, iEmbed } from '../structures';
+import { iRegisterOptions, iEmbed, config } from '../structures';
 import { Dobro } from './client/Dobro';
 import axios from 'axios';
 import { ExtendInteraction } from '../structures/iSlash';
+import { client } from '..';
 
 // Import File
 /**
@@ -58,24 +58,43 @@ export function Embed({
 	footer,
 	footericon,
 	timestamp,
+	presets,
 }: iEmbed): MessageEmbed {
 	const Embed = new MessageEmbed();
-	if (author) Embed.setAuthor(author);
-	if (author && icon) Embed.setAuthor(author, icon);
-	if (url) Embed.setURL(url);
-	if (thumbnail) Embed.setThumbnail(thumbnail);
-	if (title) Embed.setTitle(title);
-	if (description) Embed.setDescription(description);
-	if (fields) Embed.addFields(fields);
-	if (image) Embed.setImage(image);
-	Embed.setColor(color || 'RANDOM');
-	if (footer) Embed.setFooter(footer);
-	if (footer && footericon) Embed.setFooter(footer, footericon);
-	if (timestamp) {
-		if (timestamp === true) {
-			Embed.setTimestamp(new Date());
-		} else {
-			Embed.setTimestamp(timestamp);
+
+	if (presets) {
+		if (presets === 'ERROR') {
+			Embed.setColor(config.embedColors.error);
+			if (title) Embed.setTitle(title);
+			if (description)
+				Embed.setDescription(`${getEmoji(client, 'erremoji')} ${description}`);
+		}
+		if (presets === 'SUCCESS') {
+			Embed.setColor(config.embedColors.success);
+			if (title) Embed.setTitle(title);
+			if (description)
+				Embed.setDescription(
+					`${getEmoji(client, 'successemoji')} ${description}`
+				);
+		}
+	} else {
+		if (author) Embed.setAuthor(author);
+		if (author && icon) Embed.setAuthor(author, icon);
+		if (url) Embed.setURL(url);
+		if (thumbnail) Embed.setThumbnail(thumbnail);
+		if (title) Embed.setTitle(title);
+		if (description) Embed.setDescription(description);
+		if (fields) Embed.addFields(fields);
+		if (image) Embed.setImage(image);
+		Embed.setColor(color || 'RANDOM');
+		if (footer) Embed.setFooter(footer);
+		if (footer && footericon) Embed.setFooter(footer, footericon);
+		if (timestamp) {
+			if (timestamp === true) {
+				Embed.setTimestamp(new Date());
+			} else {
+				Embed.setTimestamp(timestamp);
+			}
 		}
 	}
 
@@ -89,9 +108,13 @@ export function Embed({
  * @param emojinameorid Emoji ID/Name
  * @returns GuildEmoji
  */
-export function getEmoji(client: Client, emojinameorid: string): GuildEmoji {
+export function getEmoji(
+	client: Dobro,
+	emojiname?: string,
+	emojiid?: string
+): GuildEmoji {
 	const emoji = client.emojis.cache.find(
-		(e) => e.name === emojinameorid || e.id === emojinameorid
+		(e) => e.name === emojiname || e.id === emojiid
 	) as GuildEmoji;
 
 	return emoji;
@@ -132,7 +155,7 @@ export async function meme(
 		const { data } = response;
 
 		if (data.nsfw && !(interaction.channel as TextChannel).nsfw) {
-			return Embed({ description: Meme.NSFW, color: 'DARK_RED' });
+			return Embed({ presets: 'ERROR', description: Meme.NSFW });
 		}
 
 		return Embed({
@@ -142,7 +165,10 @@ export async function meme(
 			footer: `👍 ${data.ups}`,
 		});
 	} catch (error) {
-		return Embed({ description: 'The api seems to be down :(' });
+		return Embed({
+			presets: 'ERROR',
+			description: 'The api seems to be down :(',
+		});
 	}
 }
 

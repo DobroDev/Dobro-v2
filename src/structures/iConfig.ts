@@ -1,3 +1,4 @@
+import { HexColorString } from 'discord.js';
 import { readFileSync } from 'fs';
 
 interface ConfigFile {
@@ -9,6 +10,10 @@ interface ConfigFile {
 	};
 	Database: {
 		URL: string;
+	};
+	embedColors: {
+		error: HexColorString;
+		success: HexColorString;
 	};
 	Errors: {
 		inDevelopment: string;

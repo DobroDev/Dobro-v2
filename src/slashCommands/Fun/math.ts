@@ -36,7 +36,12 @@ export default new slashCommand({
 			});
 		} catch (error) {
 			interaction.reply({
-				content: 'Failed to evaluate the question.',
+				embeds: [
+					Embed({
+						presets: 'ERROR',
+						description: 'Failed to evaluate the question.',
+					}),
+				],
 				ephemeral: true,
 			});
 		}

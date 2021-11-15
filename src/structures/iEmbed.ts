@@ -1,4 +1,6 @@
-import { ColorResolvable, EmbedFieldData, HexColorString } from "discord.js";
+import { ColorResolvable, EmbedFieldData, HexColorString } from 'discord.js';
+
+type embedPresets = 'ERROR' | 'SUCCESS';
 
 export interface iEmbed {
 	author?: string;
@@ -7,10 +9,11 @@ export interface iEmbed {
 	thumbnail?: string;
 	title?: string;
 	description?: string;
-	color?: ColorResolvable | HexColorString
+	color?: ColorResolvable | HexColorString;
 	fields?: EmbedFieldData[];
 	image?: string;
 	footer?: string;
 	footericon?: string;
 	timestamp?: Date | number | boolean;
+	presets?: embedPresets;
 }
