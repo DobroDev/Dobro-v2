@@ -8,7 +8,7 @@ export default new slashCommand({
 	options: [
 		{
 			name: 'user',
-			description: "The user's who's pp you wanna see 😏",
+			description: "The user who's pp you wanna see 😏",
 			type: 'USER',
 			required: false,
 		},
