@@ -14,7 +14,12 @@ export default new Event('interactionCreate', async (interaction) => {
 
 		const { Errors, Bot } = client.config;
 
-		if (command.Development && interaction.guild.id !== Bot.DevServer) {
+		// development
+		if (
+			command.Development &&
+			interaction.guild.id !== Bot.DevServer &&
+			!client.config.Bot.Developers.includes(interaction.user.id)
+		) {
 			return interaction.reply({
 				content: Errors.inDevelopment,
 				ephemeral: true,
@@ -22,13 +27,12 @@ export default new Event('interactionCreate', async (interaction) => {
 		}
 
 		const { formatPermission } = client.utils;
-	
+
 		//Permission Handling
 		if (!interaction.memberPermissions.has(command.permsneeded || [])) {
 			return interaction.reply({
 				content: Errors.noPerms.replace(
 					'(perms)',
-					//`${PermsObject[command.permsneeded.toString()]}`
 					`${formatPermission(command.permsneeded.toString())}`
 				),
 				ephemeral: true,

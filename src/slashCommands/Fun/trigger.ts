@@ -24,7 +24,7 @@ export default new slashCommand({
 
 		const attachment = new MessageAttachment(
 			img,
-			`${user.username}isTriggered.png`
+			`${user.username}isTriggered.gif`
 		);
 
 		interaction.reply({ files: [attachment] });

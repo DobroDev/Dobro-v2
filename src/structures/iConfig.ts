@@ -37,10 +37,6 @@ interface ConfigFile {
 			Title: string;
 			Fields: string[];
 		};
-		Coinflip: {
-			Title: string;
-			Description: string;
-		};
 		RollDice: {
 			Rolling: string;
 			Title: string;
@@ -53,6 +49,13 @@ interface ConfigFile {
 		};
 		Meme: {
 			NSFW: string;
+		};
+		Gun: {
+			Title: string;
+		};
+		PP: {
+			Title: string;
+			Description: string;
 		};
 	};
 }

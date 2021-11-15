@@ -1,24 +1,19 @@
 import { slashCommand } from '../../structures';
 
 export default new slashCommand({
-	name: 'conflip',
+	name: 'coinflip',
 	description: 'Flips a coin!',
 	permsneeded: ['SEND_MESSAGES'],
 	Development: true,
-	run: async ({ client, interaction }) => {
-		const { Coinflip } = client.config.FunCommands;
-		const { Embed } = client.utils;
-
+	run: async ({ interaction }) => {
 		const choices = ['Heads', 'Tails'];
 		const output = choices[~~(Math.random() * choices.length)];
 
-		interaction.reply({
-			embeds: [
-				Embed({
-					title: Coinflip.Title,
-					description: Coinflip.Description.replace('(result)', output),
-				}),
-			],
+		await interaction.reply({
+			content:
+				'https://cdn.discordapp.com/emojis/776154502826557470.gif?size=64',
 		});
+
+		interaction.editReply({ content: `**${output}!**` });
 	},
 });
