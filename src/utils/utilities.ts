@@ -1,11 +1,18 @@
 import {
 	GuildEmoji,
+	GuildMember,
 	MessageActionRow,
 	MessageButton,
 	MessageEmbed,
+	Role,
 	TextChannel,
 } from 'discord.js';
-import { iRegisterOptions, iEmbed, config } from '../structures';
+import {
+	iRegisterOptions,
+	iEmbed,
+	MemberFetchOptions,
+	config,
+} from '../structures';
 import { Dobro } from './client/Dobro';
 import axios from 'axios';
 import { ExtendInteraction } from '../structures/iSlash';
@@ -120,6 +127,44 @@ export function getEmoji(
 	return emoji;
 }
 
+/**
+ *
+ * @param interaction CommandInteraction
+ * @param args ID / Username / Display name / Interaction option
+ * @returns GuildMember
+ */
+export async function getMember(
+	interaction: ExtendInteraction,
+	args: MemberFetchOptions,
+	interactionOptionname: string
+): Promise<GuildMember> {
+	let member: GuildMember;
+	if (args === 'GET') {
+		member =
+			(await interaction.guild.members.fetch(args)) ||
+			interaction.guild.members.cache.find(
+				(m) => m.displayName == args || m.user.username == args || m.id === args
+			);
+	}
+	if (args === 'INTERACTION') {
+		member =
+			(interaction.options.getMember(interactionOptionname) as GuildMember) ||
+			interaction.member;
+	}
+
+	return member;
+}
+
+/**
+ *
+ * @param interaction CommandInteraction
+ * @param args Interaction option
+ * @returns User
+ */
+export function getUser(interaction: ExtendInteraction, args: string) {
+	return interaction.options.getUser(args) || interaction.user;
+}
+
 // Permission Flag formatter
 /**
  *
@@ -135,6 +180,10 @@ export function formatPermission(permission: string): string {
 		splitFixed.push(e);
 	});
 	return splitFixed.join(' ');
+}
+
+export function formatString(str: string) {
+	return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
 }
 
 /**

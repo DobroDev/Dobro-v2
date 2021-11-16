@@ -3,10 +3,6 @@ import { iSlash, config } from '../../structures/index';
 import * as Utils from '../utilities';
 import consola from 'consola';
 
-import glob from 'glob';
-import { promisify } from 'util';
-const globP = promisify(glob);
-
 import slashHandler from '../../handlers/slashHandler';
 import eventHandler from '../../handlers/eventHandler';
 

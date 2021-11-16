@@ -17,3 +17,5 @@ export interface iEmbed {
 	timestamp?: Date | number | boolean;
 	presets?: embedPresets;
 }
+
+export type MemberFetchOptions = 'GET' | 'INTERACTION';
