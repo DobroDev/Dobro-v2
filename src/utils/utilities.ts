@@ -4,7 +4,6 @@ import {
 	MessageActionRow,
 	MessageButton,
 	MessageEmbed,
-	Role,
 	TextChannel,
 } from 'discord.js';
 import {
