@@ -109,9 +109,10 @@ export default new slashCommand({
 
 		const Embed1 = Embed({
 			author: member.user.tag,
-			icon: member.displayAvatarURL(),
-			thumbnail: member.user.displayAvatarURL(),
+			icon: member.user.displayAvatarURL(),
+			thumbnail: member.displayAvatarURL(),
 			color: embedColor,
+			timestamp: true,
 			fields: [
 				{
 					name: 'Display Name',

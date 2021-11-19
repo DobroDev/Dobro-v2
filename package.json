@@ -1,6 +1,6 @@
 {
   "name": "dobro-v2",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "a very cool bot",
   "main": "dist/index.js",
   "scripts": {
@@ -8,9 +8,16 @@
     "start": "node dist/index.js",
     "dev": "ts-node-dev src/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "cool",
+    "discord",
+    "bot",
+    "typescript",
+    "discord bot",
+    "dobro"
+  ],
+  "author": "NickR69420",
+  "license": "GNU",
   "dependencies": {
     "axios": "^0.24.0",
     "colors.ts": "^1.0.20",
