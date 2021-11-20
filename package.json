@@ -1,6 +1,6 @@
 {
   "name": "dobro-v2",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "a very cool bot",
   "main": "dist/index.js",
   "scripts": {
