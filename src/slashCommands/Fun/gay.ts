@@ -16,7 +16,8 @@ export default new slashCommand({
 		},
 	],
 	run: async ({ client, interaction }) => {
-		const user = interaction.options.getUser('user') || interaction.user;
+		const { getUser } = client.utils;
+		const user = getUser(interaction, 'user');
 
 		let img = await new Gay().getImage(
 			user.displayAvatarURL({ dynamic: false, format: 'png' })
