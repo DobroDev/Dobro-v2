@@ -24,6 +24,12 @@ interface ConfigFile {
 			awaitMsg: string;
 			Response: string;
 		};
+		Stats: {
+			invalidUser: string;
+			Description: string;
+			Developers: string;
+			Links: string[];
+		};
 	};
 	FunCommands: {
 		RPS: {
