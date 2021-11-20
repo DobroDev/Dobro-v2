@@ -21,6 +21,12 @@ export default new slashCommand({
 
 		const userFlags = member.user.flags.toArray();
 		const { roles } = member;
+		const AllRoles = roles.cache.size < 25
+							? roles.cache.map((role) => `${role}`).join(' ')
+							: roles.cache
+									.map((role) => `${role}`)
+									.slice(0, 25)
+									.join(' ') + ' and more...'
 		const badges = {
 			HOUSE_BRAVERY: 'House of Bravery',
 			HOUSE_BRILLIANCE: 'House of Brilliance',
@@ -43,9 +49,7 @@ export default new slashCommand({
 				)}`;
 				break;
 			case 'dnd':
-				status = `${getEmoji(client, 'dnd')} ${formatString(
-					member.presence.status
-				)}`;
+				status = `${getEmoji(client, 'dnd')} ${member.presence.status.toUpperCase()}`;
 				break;
 			case 'idle':
 				status = `${getEmoji(client, 'idle')} ${formatString(
@@ -165,14 +169,13 @@ export default new slashCommand({
 						: 'None',
 				},
 				{
+					name: 'Highest Role',
+					value: `${member.roles.highest}`
+				},
+				{
 					name: `Roles - [${roles.cache.size}]`,
-					value:
-						roles.cache.size < 25
-							? roles.cache.map((role) => `${role}`).join(' ')
-							: roles.cache
-									.map((role) => `${role}`)
-									.slice(0, 25)
-									.join(' ') + ' and more...',
+					value: AllRoles
+			
 				},
 				{
 					name: 'Key Permissions',
