@@ -15,8 +15,9 @@ export default new slashCommand({
 			required: false,
 		},
 	],
-	run: async ({ interaction }) => {
-		const user = interaction.options.getUser('user') || interaction.user;
+	run: async ({ client, interaction }) => {
+		const { getUser } = client.utils;
+		const user = getUser(interaction, 'user');
 
 		const img = await new Triggered().getImage(
 			user.displayAvatarURL({ dynamic: false, format: 'png' })

@@ -14,6 +14,8 @@ export default new slashCommand({
 				'https://cdn.discordapp.com/emojis/776154502826557470.gif?size=64',
 		});
 
-		interaction.editReply({ content: `**${output}!**` });
+		setTimeout(() => {
+			interaction.editReply({ content: `**${output}!**` });
+		}, 1000);
 	},
 });

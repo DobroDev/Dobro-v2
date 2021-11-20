@@ -16,8 +16,8 @@ export default new slashCommand({
 	],
 	run: async ({ client, interaction }) => {
 		const { Gun } = client.config.FunCommands;
-		const { Embed } = client.utils;
-		const user = interaction.options.getUser('user') || interaction.user;
+		const { Embed, getUser } = client.utils;
+		const user = getUser(interaction, 'user');
 
 		const img = new MessageAttachment(
 			`https://api.popcat.xyz/gun?image=${user.displayAvatarURL({

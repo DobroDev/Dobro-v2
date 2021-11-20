@@ -15,8 +15,8 @@ export default new slashCommand({
 	],
 	run: async ({ client, interaction }) => {
 		const { PP } = client.config.FunCommands;
-		const { Embed } = client.utils;
-		const user = interaction.options.getUser('user') || interaction.user;
+		const { Embed, getUser } = client.utils;
+		const user = getUser(interaction, 'user');
 
 		function makePP(length: number) {
 			let result = '';

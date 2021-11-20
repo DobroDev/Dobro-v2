@@ -15,9 +15,9 @@ export default new slashCommand({
 	],
 	run: async ({ client, interaction }) => {
 		const { HowGay } = client.config.FunCommands;
-		const { Embed } = client.utils;
+		const { Embed, getUser } = client.utils;
 
-		const user = interaction.options.getUser('user') || interaction.user;
+		const user = getUser(interaction, 'user');
 		const gayness = Math.floor(Math.random() * 101);
 
 		interaction.reply({
