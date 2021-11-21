@@ -244,7 +244,7 @@ export async function updateMeme(
 				ephemeral: true,
 			});
 
-		button.deferUpdate();
+	await button.deferUpdate();
 		await updateMeme(client, subreddit, interaction);
 		collector.stop();
 	});

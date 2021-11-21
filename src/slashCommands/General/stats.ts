@@ -113,7 +113,7 @@ export default new slashCommand({
 				interaction.editReply({ embeds: [Em2], components: [row] });
 			}
 
-			i.deferUpdate();
+			await i.deferUpdate();
 		});
 
 		collector.on('end', async (button, i) => {

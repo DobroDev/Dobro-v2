@@ -105,7 +105,7 @@ export default new slashCommand({
 				});
 			}
 
-			collected.deferUpdate();
+		await collected.deferUpdate();
 		});
 	},
 });
