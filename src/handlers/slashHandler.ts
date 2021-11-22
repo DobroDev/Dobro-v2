@@ -1,6 +1,6 @@
 import { Dobro } from '../utils/client/Dobro';
 import { ApplicationCommandDataResolvable } from 'discord.js';
-import { iSlash } from '../structures';
+import { iContext, iSlash } from '../structures';
 import glob from 'glob';
 import { promisify } from 'util';
 const globP = promisify(glob);
@@ -13,6 +13,7 @@ export default async (client: Dobro) => {
 	slashFiles.forEach(async (file) => {
 		const slash: iSlash = await client.utils.importFile(file);
 		if (!slash.name) return;
+		if (!slash.description) return;
 
 		if (slash.Development) {
 			client.slashCommands.set(slash.name, slash);
@@ -22,6 +23,20 @@ export default async (client: Dobro) => {
 		slashArray.push(slash);
 	});
 
+	const contextFiles = await globP(
+		`${__dirname}/../slashCommands/Context/*{.ts,.js}`
+	);
+	contextFiles.forEach(async (file) => {
+		const context: iContext = await client.utils.importFile(file);
+		if (!context.name && !context.type) return;
+
+		if (context.Guild) {
+			client.contextMenus.set(context.name, context)
+			devArray.push(context)
+		}
+		client.contextMenus.set(context.name, context)
+		slashArray.push(context)
+	});
 	client.on('ready', async () => {
 		const { DevServer } = client.config.Bot;
 

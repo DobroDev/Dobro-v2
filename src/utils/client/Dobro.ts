@@ -1,5 +1,5 @@
 import { Client, Collection } from 'discord.js';
-import { iSlash, config } from '../../structures/index';
+import { iSlash, config, iContext } from '../../structures/index';
 import * as Utils from '../utilities';
 import consola from 'consola';
 
@@ -8,6 +8,7 @@ import eventHandler from '../../handlers/eventHandler';
 
 export class Dobro extends Client {
 	slashCommands: Collection<string, iSlash> = new Collection();
+	contextMenus: Collection<string, iContext> = new Collection();
 	config = config;
 	prefix = this.config.Bot.Prefix;
 	utils = Utils;
@@ -22,7 +23,7 @@ export class Dobro extends Client {
 	startUp() {
 		this.loadModules();
 		this.login(this.config.Bot.Token).catch((err: Error) => {
-			this.consola.error('Invalid token provided.', err);
+			this.consola.error(new Error('Invalid token provided.' + err));
 			process.exit(1);
 		});
 	}
