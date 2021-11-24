@@ -24,7 +24,8 @@ export default new slashCommand({
 		await interaction.reply({
 			embeds: [Embed({ description: RollDice.Rolling })],
 		});
-		await interaction.editReply({
+
+		interaction.editReply({
 			embeds: [
 				Embed({
 					title: RollDice.Title,

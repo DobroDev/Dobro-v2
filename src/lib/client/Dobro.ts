@@ -1,6 +1,6 @@
 import { Client, Collection } from 'discord.js';
 import { iSlash, config, iContext } from '../../structures/index';
-import * as Utils from '../utilities';
+import * as utils from '../utilities';
 import consola from 'consola';
 
 import slashHandler from '../../handlers/slashHandler';
@@ -11,7 +11,7 @@ export class Dobro extends Client {
 	contextMenus: Collection<string, iContext> = new Collection();
 	config = config;
 	prefix = this.config.Bot.Prefix;
-	utils = Utils;
+	utils = utils;
 	consola = consola;
 	constructor() {
 		super({

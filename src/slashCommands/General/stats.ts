@@ -10,8 +10,9 @@ export default new slashCommand({
 	permsneeded: ['SEND_MESSAGES'],
 	Development: true,
 	run: async ({ client, interaction }) => {
-		const { Embed } = client.utils;
+		const { Embed, getEmoji } = client.utils;
 		const { Stats } = client.config.GeneralCommands;
+		const cpu = os.cpus()[0];
 
 		const row = new MessageActionRow().addComponents(
 			new MessageButton()
@@ -48,7 +49,7 @@ export default new slashCommand({
 			fields: [
 				{
 					name: 'Library & Version',
-					value: `Discord.js v${version}`,
+					value: `${getEmoji(client, 'discordjs')} Discord.js v${version}`,
 					inline: true,
 				},
 				{ name: 'Developers', value: Stats.Developers, inline: true },
@@ -68,8 +69,6 @@ export default new slashCommand({
 				},
 			],
 		});
-
-		const cpu = os.cpus()[0];
 
 		const Em2 = Embed({
 			fields: [

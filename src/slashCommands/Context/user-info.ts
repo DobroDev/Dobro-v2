@@ -1,10 +1,9 @@
 import { contextMenu } from '../../structures';
-import { ColorResolvable, TextChannel } from 'discord.js';
+import { ColorResolvable, MessageActionRow, MessageButton } from 'discord.js';
 import moment from 'moment';
-import { pagination } from 'reconlx';
 
 export default new contextMenu({
-	name: 'getUserinfo',
+	name: 'user-info',
 	type: 'USER',
 	permsneeded: ['SEND_MESSAGES'],
 	Guild: true,
@@ -180,27 +179,63 @@ export default new contextMenu({
 			],
 		});
 
-		const Ems = [Embed1, Embed2];
+		const disabled = new MessageActionRow().addComponents(
+			new MessageButton()
+				.setCustomId(`em1`)
+				.setLabel('⬅️')
+				.setStyle('PRIMARY')
+				.setDisabled(true),
+			new MessageButton()
+				.setCustomId(`em2`)
+				.setLabel('➡️')
+				.setStyle('PRIMARY')
+				.setDisabled(true)
+		);
+		const disabled1 = new MessageActionRow().addComponents(
+			new MessageButton()
+				.setCustomId(`em1`)
+				.setLabel('⬅️')
+				.setStyle('PRIMARY')
+				.setDisabled(true),
+			new MessageButton().setCustomId(`em2`).setLabel('➡️').setStyle('PRIMARY')
+		);
 
-		pagination({
-			author: context.user,
-			channel: context.channel as TextChannel,
-			embeds: Ems,
-			time: 30000,
-			button: [
-				{
-					name: 'next',
-					emoji: '➡️',
-				},
-				{
-					name: 'previous',
-					emoji: '⬅️',
-				},
-			],
-		});
+		const disabled2 = new MessageActionRow().addComponents(
+			new MessageButton().setCustomId(`em1`).setLabel('⬅️').setStyle('PRIMARY'),
+			new MessageButton()
+				.setCustomId(`em2`)
+				.setLabel('➡️')
+				.setStyle('PRIMARY')
+				.setDisabled(true)
+		);
+
 		await context.reply({
-			content: `Now displaying ${member.user.username}'s info.`,
+			embeds: [Embed1],
+			components: [disabled1],
 			ephemeral: true,
+		});
+
+		const collector = context.channel.createMessageComponentCollector({
+			componentType: 'BUTTON',
+			time: 30000,
+		});
+
+		collector.on('collect', async (collected) => {
+			if (collected.customId === 'em1') {
+				context.editReply({ embeds: [Embed1], components: [disabled1] });
+			}
+
+			if (collected.customId === 'em2') {
+				context.editReply({ embeds: [Embed2], components: [disabled2] });
+			}
+
+			await collected.deferUpdate();
+		});
+
+		collector.on('end', async (button, i) => {
+			if (i === 'time') {
+				context.editReply({ components: [disabled] });
+			}
 		});
 	},
 });

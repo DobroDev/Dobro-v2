@@ -23,11 +23,8 @@ export default new slashCommand({
 			user.displayAvatarURL({ dynamic: false, format: 'png' })
 		);
 
-		const attachment = new MessageAttachment(
-			img,
-			`${user.username}isTriggered.gif`
-		);
-
-		interaction.reply({ files: [attachment] });
+		await interaction.reply({
+			files: [new MessageAttachment(img, 'triggered.gif')],
+		});
 	},
 });

@@ -23,7 +23,6 @@ export default new slashCommand({
 			user.displayAvatarURL({ dynamic: false, format: 'png' })
 		);
 
-		let attachment = new MessageAttachment(img, `${user.username}isGay.png`);
-		interaction.reply({ files: [attachment] });
+		interaction.reply({ files: [new MessageAttachment(img, `${user.username}isGay.png`)] });
 	},
 });

@@ -5,7 +5,7 @@ import {
 	GuildMember,
 	PermissionResolvable,
 } from 'discord.js';
-import { Dobro } from '../utils/client/Dobro';
+import { Dobro } from '../lib/client/Dobro';
 
 export interface ExtendInteraction extends CommandInteraction {
 	/** Interaction Member */

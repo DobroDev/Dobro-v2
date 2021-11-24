@@ -9,7 +9,7 @@ import { ExtendInteraction } from '../structures/iSlash';
 export default new Event('interactionCreate', async (interaction) => {
 	const { Errors, Bot } = client.config;
 	const { formatPermission } = client.utils;
-	
+
 	if (interaction.isCommand()) {
 		const command = client.slashCommands.get(interaction.commandName);
 		if (!command)
@@ -40,6 +40,7 @@ export default new Event('interactionCreate', async (interaction) => {
 				ephemeral: true,
 			});
 		}
+
 		try {
 			command.run({
 				args: interaction.options as CommandInteractionOptionResolver,

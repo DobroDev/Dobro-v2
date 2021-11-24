@@ -23,11 +23,8 @@ export default new slashCommand({
 			user.displayAvatarURL({ dynamic: false, format: 'png' })
 		);
 
-		const attactment = new MessageAttachment(
-			img,
-			`${user.username}isTrash.png`
-		);
-
-		interaction.reply({ files: [attactment] });
+		interaction.reply({
+			files: [new MessageAttachment(img, `${user.username}isTrash.png`)],
+		});
 	},
 });

@@ -5,6 +5,7 @@ export default new slashCommand({
 	name: '8ball',
 	description: 'Ask the 8ball about your future! (100% real!!)',
 	permsneeded: ['SEND_MESSAGES'],
+	Development: true,
 	options: [
 		{
 			name: 'question',

@@ -5,7 +5,7 @@ import {
 	ContextMenuInteraction,
 	PermissionResolvable,
 } from 'discord.js';
-import { Dobro } from '../utils/client/Dobro';
+import { Dobro } from '../lib/client/Dobro';
 
 interface ContextRunOptions {
 	client: Dobro;

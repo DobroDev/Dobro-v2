@@ -9,7 +9,7 @@ export default new slashCommand({
 	options: [
 		{
 			name: 'equation',
-			description: 'Thq equation to be evaluated.',
+			description: 'The equation to be evaluated.',
 			type: 'STRING',
 			required: true,
 		},

@@ -1,4 +1,4 @@
-import { Dobro } from '../utils/client/Dobro';
+import { Dobro } from '../lib/client/Dobro';
 import { ApplicationCommandDataResolvable } from 'discord.js';
 import { iContext, iSlash } from '../structures';
 import glob from 'glob';
@@ -28,14 +28,14 @@ export default async (client: Dobro) => {
 	);
 	contextFiles.forEach(async (file) => {
 		const context: iContext = await client.utils.importFile(file);
-		if (!context.name && !context.type) return;
+		if (!context.name) return;
 
 		if (context.Guild) {
-			client.contextMenus.set(context.name, context)
-			devArray.push(context)
+			client.contextMenus.set(context.name, context);
+			devArray.push(context);
 		}
-		client.contextMenus.set(context.name, context)
-		slashArray.push(context)
+		client.contextMenus.set(context.name, context);
+		slashArray.push(context);
 	});
 	client.on('ready', async () => {
 		const { DevServer } = client.config.Bot;
@@ -44,7 +44,7 @@ export default async (client: Dobro) => {
 			client: client,
 			guildID: DevServer,
 			devcommands: devArray,
-			appcommands: slashArray,
+			//	appcommands: slashArray,
 		});
 	});
 };

@@ -1,4 +1,4 @@
-import { Dobro } from '../utils/client/Dobro';
+import { Dobro } from '../lib/client/Dobro';
 import { Event } from '../structures';
 import { ClientEvents } from 'discord.js';
 import glob from 'glob';

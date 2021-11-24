@@ -63,6 +63,10 @@ interface ConfigFile {
 			Title: string;
 			Description: string;
 		};
+		Sus: {
+			message: string;
+			images: string[];
+		};
 	};
 }
 

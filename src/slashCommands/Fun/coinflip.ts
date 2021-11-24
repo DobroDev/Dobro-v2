@@ -16,6 +16,6 @@ export default new slashCommand({
 
 		setTimeout(() => {
 			interaction.editReply({ content: `**${output}!**` });
-		}, 1000);
+		}, 500);
 	},
 });

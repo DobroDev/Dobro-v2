@@ -1,4 +1,4 @@
-import { Dobro } from "./utils/client/Dobro"; 
+import { Dobro } from "./lib/client/Dobro"; 
 
 export const client = new Dobro();
 

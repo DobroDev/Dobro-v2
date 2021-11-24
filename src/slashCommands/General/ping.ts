@@ -9,13 +9,12 @@ export default new slashCommand({
 		const { Ping } = client.config.GeneralCommands;
 		const date = Date.now();
 
-		interaction.reply(Ping.awaitMsg).then(() => {
-			interaction.editReply(
-				Ping.Response.replace('(ping)', `${client.ws.ping}`).replace(
-					'(msgping)',
-					`${Date.now() - date}`
-				)
-			);
-		});
+		await interaction.reply(Ping.awaitMsg);
+		interaction.editReply(
+			Ping.Response.replace('(ping)', `${client.ws.ping}`).replace(
+				'(msgping)',
+				`${Date.now() - date}`
+			)
+		);
 	},
 });
