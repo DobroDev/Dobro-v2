@@ -1,6 +1,6 @@
 {
-  "name": "dobro-v2",
-  "version": "2.1.0",
+  "name": "dobro",
+  "version": "2.0.0",
   "description": "a very cool bot",
   "main": "dist/index.js",
   "scripts": {
@@ -28,15 +28,15 @@
     "expr-eval": "^2.0.2",
     "glob": "^7.2.0",
     "moment": "^2.29.1",
-    "mongoose": "^6.0.12",
+    "mongoose": "^6.0.13",
     "pretty-ms": "^7.0.1",
     "reconlx": "^2.5.1"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
-    "@types/node": "^16.11.6",
-    "prettier": "^2.4.1",
+    "@types/node": "^16.11.10",
+    "prettier": "^2.5.0",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.2"
   }
 }
