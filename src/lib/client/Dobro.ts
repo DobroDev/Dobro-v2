@@ -22,12 +22,15 @@ export class Dobro extends Client {
 		});
 	}
 
-	startUp() {
+	 startUp() {
 		this.loadModules();
 		this.login(this.config.Bot.Token).catch((err: Error) => {
 			this.consola.error(new Error('Invalid token provided.' + err));
 			process.exit(1);
 		});
+		this.utils
+			.dbConnect(this.config.Database.URL)
+			.catch((err) => this.consola.error(new Error(err)));
 	}
 
 	loadModules() {

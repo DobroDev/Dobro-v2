@@ -16,6 +16,7 @@ import { Dobro } from './client/Dobro';
 import axios from 'axios';
 import { ExtendInteraction } from '../structures/iSlash';
 import { client } from '..';
+import mongoose from 'mongoose';
 
 // Import File
 /**
@@ -265,4 +266,14 @@ export async function updateMeme(
 			interaction.editReply({ components: [disable] });
 		}
 	});
+}
+
+// Database Connection
+/**
+ * 
+ * @param MongoURI mongooseConnectionString
+ */
+export async function dbConnect(MongoURI: string) {
+	await mongoose.connect(MongoURI);
+	client.consola.log(client.chalk.greenBright('[Database] Connected.'));
 }
