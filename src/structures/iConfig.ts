@@ -30,6 +30,9 @@ interface ConfigFile {
 			Developers: string;
 			Links: string[];
 		};
+		Uptime: {
+			message: string;
+		};
 	};
 	FunCommands: {
 		RPS: {
