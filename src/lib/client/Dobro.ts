@@ -2,6 +2,7 @@ import { Client, Collection } from 'discord.js';
 import { iSlash, config, iContext } from '../../structures/index';
 import * as utils from '../utilities';
 import consola from 'consola';
+import chalk from 'chalk';
 
 import slashHandler from '../../handlers/slashHandler';
 import eventHandler from '../../handlers/eventHandler';
@@ -13,6 +14,7 @@ export class Dobro extends Client {
 	prefix = this.config.Bot.Prefix;
 	utils = utils;
 	consola = consola;
+	chalk = chalk;
 	constructor() {
 		super({
 			intents: 32767,

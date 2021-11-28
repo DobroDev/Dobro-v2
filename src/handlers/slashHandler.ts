@@ -38,7 +38,9 @@ export default async (client: Dobro) => {
 		slashArray.push(context);
 	});
 
-	client.consola.log(`[Handler] Loaded ${slashArray.length} commands/menus.`);
+	client.consola.log(
+		client.chalk.yellow(`[Handler] Loaded ${slashArray.length} commands/menus.`)
+	);
 
 	client.on('ready', async () => {
 		const { DevServer } = client.config.Bot;

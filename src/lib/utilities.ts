@@ -42,11 +42,15 @@ export async function registerSlash({
 	}
 	if (guildID && devcommands) {
 		await client.guilds.cache.get(guildID)?.commands.set(devcommands);
-		client.consola.log('[Bot] Registered (/) commands to Dev Server.');
+		client.consola.log(
+			client.chalk.blueBright('[Bot] Registered (/) commands to Dev Server.')
+		);
 	}
 	if (appcommands) {
 		client.application?.commands.set(appcommands);
-		client.consola.log('[Bot] Registered (/) commands globally.');
+		client.consola.log(
+			client.chalk.blueBright('[Bot] Registered (/) commands globally.')
+		);
 	}
 }
 
@@ -244,7 +248,7 @@ export async function updateMeme(
 				ephemeral: true,
 			});
 
-	await button.deferUpdate();
+		await button.deferUpdate();
 		await updateMeme(client, subreddit, interaction);
 		collector.stop();
 	});

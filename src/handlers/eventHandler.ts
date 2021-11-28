@@ -13,4 +13,7 @@ export default async (client: Dobro) => {
 		);
 		client.on(event.event, event.run);
 	});
+	client.consola.log(
+		client.chalk.yellow(`[Handler] Loaded ${eventFiles.length} events.`)
+	);
 };
