@@ -3,7 +3,7 @@ import { ColorResolvable, MessageActionRow, MessageButton } from 'discord.js';
 import moment from 'moment';
 
 export default new contextMenu({
-	name: 'user-info',
+	name: 'user info',
 	type: 'USER',
 	permsneeded: ['SEND_MESSAGES'],
 	Guild: true,
