@@ -42,11 +42,11 @@ export async function registerSlash({
 	}
 	if (guildID && devcommands) {
 		await client.guilds.cache.get(guildID)?.commands.set(devcommands);
-		client.consola.log('Registered (/) commands to Dev Server.');
+		client.consola.log('[Bot] Registered (/) commands to Dev Server.');
 	}
 	if (appcommands) {
 		client.application?.commands.set(appcommands);
-		client.consola.log('Registered (/) commands globally.');
+		client.consola.log('[Bot] Registered (/) commands globally.');
 	}
 }
 

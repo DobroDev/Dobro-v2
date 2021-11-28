@@ -37,6 +37,9 @@ export default async (client: Dobro) => {
 		client.contextMenus.set(context.name, context);
 		slashArray.push(context);
 	});
+
+	client.consola.log(`[Handler] Loaded ${slashArray.length} commands/menus.`);
+
 	client.on('ready', async () => {
 		const { DevServer } = client.config.Bot;
 
@@ -44,7 +47,7 @@ export default async (client: Dobro) => {
 			client: client,
 			guildID: DevServer,
 			devcommands: devArray,
-			//	appcommands: slashArray,
+			appcommands: slashArray,
 		});
 	});
 };
