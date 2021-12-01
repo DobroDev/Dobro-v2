@@ -6,6 +6,7 @@ import chalk from 'chalk';
 
 import slashHandler from '../../handlers/slashHandler';
 import eventHandler from '../../handlers/eventHandler';
+import errorHandler from '../../handlers/errorHandler';
 
 export class Dobro extends Client {
 	slashCommands: Collection<string, iSlash> = new Collection();
@@ -22,7 +23,7 @@ export class Dobro extends Client {
 		});
 	}
 
-	 startUp() {
+	startUp() {
 		this.loadModules();
 		this.login(this.config.Bot.Token).catch((err: Error) => {
 			this.consola.error(new Error('Invalid token provided.' + err));
@@ -36,5 +37,6 @@ export class Dobro extends Client {
 	loadModules() {
 		eventHandler(this);
 		slashHandler(this);
+		errorHandler(this);
 	}
 }

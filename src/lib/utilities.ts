@@ -38,7 +38,7 @@ export async function registerSlash({
 }: iRegisterOptions) {
 	if (resetcommands) {
 		await client.guilds.cache.get(guildID)?.commands.set([]);
-		await client.application?.commands.set([]);
+		client.application?.commands.set([]);
 		return;
 	}
 	if (guildID && devcommands) {
@@ -270,7 +270,7 @@ export async function updateMeme(
 
 // Database Connection
 /**
- * 
+ *
  * @param MongoURI mongooseConnectionString
  */
 export async function dbConnect(MongoURI: string) {
