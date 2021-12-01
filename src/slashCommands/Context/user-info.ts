@@ -1,5 +1,10 @@
 import { contextMenu } from '../../structures';
-import { ColorResolvable, MessageActionRow, MessageButton } from 'discord.js';
+import {
+	ColorResolvable,
+	MessageActionRow,
+	MessageButton,
+	MessageEmbed,
+} from 'discord.js';
 import moment from 'moment';
 
 export default new contextMenu({
@@ -33,36 +38,6 @@ export default new contextMenu({
 			VERIFIED_BOT: 'Verified Bot',
 			DISCORD_CERTIFIED_MODERATOR: 'Certified Discord Moderator',
 		};
-
-		let status: string;
-		switch (member.presence.status) {
-			case 'online':
-				status = `${getEmoji(client, 'online')} ${formatString(
-					member.presence.status
-				)}`;
-				break;
-			case 'dnd':
-				status = `${getEmoji(
-					client,
-					'dnd'
-				)} ${member.presence.status.toUpperCase()}`;
-				break;
-			case 'idle':
-				status = `${getEmoji(client, 'idle')} ${formatString(
-					member.presence.status
-				)}`;
-				break;
-			case 'offline':
-				status = `${getEmoji(client, 'offline')} ${formatString(
-					member.presence.status
-				)}`;
-				break;
-			case null:
-				status = `${getEmoji(client, 'offline')} ${formatString(
-					member.presence.status
-				)}`;
-				break;
-		}
 
 		const permissions = [];
 
@@ -149,35 +124,86 @@ export default new contextMenu({
 			],
 		});
 
-		const Embed2 = Embed({
-			color: embedColor,
-			fields: [
-				{
-					name: 'Status',
-					value: status,
-				},
-				{
-					name: 'Activity',
-					value: member.presence.activities[1]
-						? `${formatString(member.presence.activities[1].type)} ${
-								member.presence.activities[1].name
-						  }`
-						: 'None',
-				},
-				{
-					name: 'Highest Role',
-					value: `${member.roles.highest}`,
-				},
-				{
-					name: `Roles - [${roles.cache.size}]`,
-					value: AllRoles,
-				},
-				{
-					name: 'Key Permissions',
-					value: permissions.length > 0 ? permissions.join(', ') : 'None',
-				},
-			],
-		});
+		let Embed2: MessageEmbed;
+		let status: string;
+		if (member.presence) {
+			switch (member.presence.status) {
+				case 'online':
+					status = `${getEmoji(client, 'online')} ${formatString(
+						member.presence.status
+					)}`;
+					break;
+				case 'dnd':
+					status = `${getEmoji(
+						client,
+						'dnd'
+					)} ${member.presence.status.toUpperCase()}`;
+					break;
+				case 'idle':
+					status = `${getEmoji(client, 'idle')} ${formatString(
+						member.presence.status
+					)}`;
+					break;
+				case 'offline':
+					status = `${getEmoji(client, 'offline')} ${formatString(
+						member.presence.status
+					)}`;
+					break;
+			}
+
+			Embed2 = Embed({
+				color: embedColor,
+				fields: [
+					{
+						name: 'Status',
+						value: status,
+					},
+					{
+						name: 'Activity',
+						value: member.presence.activities[1]
+							? `${formatString(member.presence.activities[1].type)} ${
+									member.presence.activities[1].name
+							  }`
+							: 'None',
+					},
+					{
+						name: 'Highest Role',
+						value: `${member.roles.highest}`,
+					},
+					{
+						name: `Roles - [${roles.cache.size}]`,
+						value: AllRoles,
+					},
+					{
+						name: 'Key Permissions',
+						value: permissions.length > 0 ? permissions.join(', ') : 'None',
+					},
+				],
+			});
+		} else {
+			status = `${getEmoji(client, 'offline')} ${formatString('OFFLINE')}`;
+			Embed2 = Embed({
+				color: embedColor,
+				fields: [
+					{
+						name: 'Status',
+						value: status,
+					},
+					{
+						name: 'Highest Role',
+						value: `${member.roles.highest}`,
+					},
+					{
+						name: `Roles - [${roles.cache.size}]`,
+						value: AllRoles,
+					},
+					{
+						name: 'Key Permissions',
+						value: permissions.length > 0 ? permissions.join(', ') : 'None',
+					},
+				],
+			});
+		}
 
 		const disabled = new MessageActionRow().addComponents(
 			new MessageButton()
