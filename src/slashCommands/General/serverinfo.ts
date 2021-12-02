@@ -13,6 +13,7 @@ export default new slashCommand({
 
 		const unknownIcon =
 			'https://external-preview.redd.it/9HZBYcvaOEnh4tOp5EqgcCr_vKH7cjFJwkvw-45Dfjs.png?auto=webp&s=ade9b43592942905a45d04dbc5065badb5aa3483';
+
 		const categories = guild.channels.cache.filter(
 			(ch) => ch.type === 'GUILD_CATEGORY'
 		).size;

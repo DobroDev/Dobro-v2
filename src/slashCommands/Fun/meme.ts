@@ -45,7 +45,7 @@ export default new slashCommand({
 
 		const LoadMeme = await meme(client, subreddit, interaction);
 
-		await interaction.reply({ embeds: [LoadMeme], components: [reload] });
+		interaction.reply({ embeds: [LoadMeme], components: [reload] });
 
 		const collector = interaction.channel.createMessageComponentCollector({
 			componentType: 'BUTTON',
@@ -59,8 +59,8 @@ export default new slashCommand({
 					ephemeral: true,
 				});
 
-		await button.deferUpdate();
 			await updateMeme(client, subreddit, interaction);
+			button.deferUpdate();
 			collector.stop();
 		});
 

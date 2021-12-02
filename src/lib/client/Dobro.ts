@@ -12,7 +12,6 @@ export class Dobro extends Client {
 	slashCommands: Collection<string, iSlash> = new Collection();
 	contextMenus: Collection<string, iContext> = new Collection();
 	config = config;
-	prefix = this.config.Bot.Prefix;
 	utils = utils;
 	consola = consola;
 	chalk = chalk;

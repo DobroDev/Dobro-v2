@@ -4,7 +4,6 @@ import { readFileSync } from 'fs';
 interface ConfigFile {
 	Bot: {
 		Token: string;
-		Prefix: string;
 		Developers: string[];
 		DevServer: string;
 	};

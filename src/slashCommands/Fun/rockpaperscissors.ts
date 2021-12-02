@@ -65,7 +65,7 @@ export default new slashCommand({
 
 				await interaction.editReply({
 					embeds: [resultEmbed],
-					components: [row],
+					components: [],
 				});
 			}
 
@@ -83,7 +83,7 @@ export default new slashCommand({
 
 				await interaction.editReply({
 					embeds: [resultEmbed],
-					components: [row],
+					components: [],
 				});
 			}
 
@@ -101,11 +101,11 @@ export default new slashCommand({
 
 				await interaction.editReply({
 					embeds: [resultEmbed],
-					components: [row],
+					components: [],
 				});
 			}
 
-		await collected.deferUpdate();
+			await collected.deferUpdate();
 		});
 	},
 });

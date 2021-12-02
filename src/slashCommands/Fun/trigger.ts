@@ -16,6 +16,8 @@ export default new slashCommand({
 		},
 	],
 	run: async ({ client, interaction }) => {
+		await interaction.deferReply();
+
 		const { getUser } = client.utils;
 		const user = getUser(interaction, 'user');
 
@@ -23,7 +25,7 @@ export default new slashCommand({
 			user.displayAvatarURL({ dynamic: false, format: 'png' })
 		);
 
-		await interaction.reply({
+		interaction.followUp({
 			files: [new MessageAttachment(img, 'triggered.gif')],
 		});
 	},

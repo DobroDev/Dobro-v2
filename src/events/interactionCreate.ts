@@ -18,7 +18,7 @@ export default new Event('interactionCreate', async (interaction) => {
 				ephemeral: true,
 			});
 
-		// development
+		// Development command restriction
 		if (
 			command.Development &&
 			interaction.guild.id !== Bot.DevServer &&
@@ -47,15 +47,23 @@ export default new Event('interactionCreate', async (interaction) => {
 				interaction: interaction as ExtendInteraction,
 				client,
 			});
-		} catch (e) {
+		} catch (e: any) {
 			client.consola.error(new Error(e));
-			return interaction.reply({
-				content: ':x: Something went wrong.. Please contact a developer!',
-				ephemeral: true,
-			});
+
+			if (interaction.replied) {
+				return interaction
+					.followUp({
+						content: ':x: Something went wrong.. Please contact a developer!',
+						ephemeral: true,
+					})
+					.catch((e: any) => {
+						client.consola.error(new Error(e));
+					});
+			}
 		}
 	}
 
+	// Context Menus
 	if (interaction.isContextMenu()) {
 		const menu = client.contextMenus.get(interaction.commandName);
 		if (!menu)
@@ -64,6 +72,7 @@ export default new Event('interactionCreate', async (interaction) => {
 				ephemeral: true,
 			});
 
+		// Permission Handling
 		if (!interaction.memberPermissions.has(menu.permsneeded || [])) {
 			return interaction.reply({
 				content: Errors.noPerms.replace(

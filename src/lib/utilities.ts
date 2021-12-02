@@ -18,9 +18,9 @@ import { ExtendInteraction } from '../structures/iSlash';
 import { client } from '..';
 import mongoose from 'mongoose';
 
-// Import File
 /**
  *
+ * @name registerSlash
  * @param filePath The filepath to get file from
  * @returns file
  */
@@ -28,14 +28,18 @@ export async function importFile(filePath: string) {
 	return (await import(filePath))?.default;
 }
 
-// Slash Command Registering
+/**
+ * 
+ * @name registerSlash
+ * @description Registers slash commands
+ */
 export async function registerSlash({
 	client,
 	guildID,
 	resetcommands,
 	devcommands,
 	appcommands,
-}: iRegisterOptions) {
+}: iRegisterOptions): Promise<void> {
 	if (resetcommands) {
 		await client.guilds.cache.get(guildID)?.commands.set([]);
 		client.application?.commands.set([]);
@@ -55,7 +59,12 @@ export async function registerSlash({
 	}
 }
 
-// Embed Builer
+/**
+ * 
+ * @name Embed
+ * @description Create a MessageEmbed with ease!
+ * @returns MessageEmbed
+ */
 export function Embed({
 	author,
 	icon,
@@ -112,11 +121,13 @@ export function Embed({
 	return Embed;
 }
 
-// Emoji getter
 /**
- *
+ * 
+ * @name getEmoji
+ * @description Get a custom emoji with ease!
  * @param client Discord Client
- * @param emojinameorid Emoji ID/Name
+ * @param emojiname Emoji's name
+ * @param emojiid Emoji's ID
  * @returns GuildEmoji
  */
 export function getEmoji(
@@ -133,6 +144,8 @@ export function getEmoji(
 
 /**
  *
+ * @name getMember
+ * @description Fetches a GuildMember
  * @param interaction CommandInteraction
  * @param args ID / Username / Display name / Interaction option
  * @returns GuildMember
@@ -161,6 +174,8 @@ export async function getMember(
 
 /**
  *
+ * @name getUser
+ * @description Fetches a User
  * @param interaction CommandInteraction
  * @param args Interaction option
  * @returns User
@@ -169,9 +184,10 @@ export function getUser(interaction: ExtendInteraction, args: string) {
 	return interaction.options.getUser(args) || interaction.user;
 }
 
-// Permission Flag formatter
 /**
  *
+ * @name formatPermission
+ * @description Formats a Discord Permission
  * @param permission Permission flag string
  * @returns Formatted permission
  */
@@ -186,14 +202,25 @@ export function formatPermission(permission: string): string {
 	return splitFixed.join(' ');
 }
 
+/**
+ * 
+ * @name formatString
+ * @description Formats a string
+ * @param str String to format
+ * @returns Formatted string
+ */
 export function formatString(str: string) {
 	return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
 }
 
 /**
- * @command Meme
+ * 
+ * @command meme
+ * @param client Discord Client
+ * @param subreddit Name of the subreddit
+ * @param interaction CommandInteraction
+ * @returns MessageEmbed
  */
-
 export async function meme(
 	client: Dobro,
 	subreddit: string,
@@ -226,7 +253,12 @@ export async function meme(
 }
 
 /**
- * @command Meme
+ * 
+ * @command meme
+ * @param client Discord Client
+ * @param subreddit Name of the subreddit
+ * @param interaction CommandInteraction
+ * @returns MessageEmbed
  */
 export async function updateMeme(
 	client: Dobro,
@@ -268,10 +300,11 @@ export async function updateMeme(
 	});
 }
 
-// Database Connection
 /**
- *
- * @param MongoURI mongooseConnectionString
+ * 
+ * @name dbConnect
+ * @description Connects to the database
+ * @param MongoURI MongoDb connection string
  */
 export async function dbConnect(MongoURI: string) {
 	await mongoose.connect(MongoURI);
