@@ -56,7 +56,7 @@ export default new slashCommand({
 
 		try {
 			await member.ban({
-				reason: `Banned by ${staffMember.user.tag} for ${reason}`,
+				reason: `Banned by ${staffMember.user.tag}. Reason: ${reason}`,
 				days: 7,
 			});
 
