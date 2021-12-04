@@ -51,7 +51,7 @@ export default new Event('interactionCreate', async (interaction) => {
 			client.consola.error(new Error(e));
 
 			if (interaction.replied) {
-				return interaction
+				 interaction
 					.followUp({
 						content: ':x: Something went wrong.. Please contact a developer!',
 						ephemeral: true,
@@ -59,6 +59,7 @@ export default new Event('interactionCreate', async (interaction) => {
 					.catch((e: any) => {
 						client.consola.error(new Error(e));
 					});
+				return;
 			}
 		}
 	}

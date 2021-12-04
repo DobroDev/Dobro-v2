@@ -29,7 +29,7 @@ export async function importFile(filePath: string) {
 }
 
 /**
- * 
+ *
  * @name registerSlash
  * @description Registers slash commands
  */
@@ -60,7 +60,7 @@ export async function registerSlash({
 }
 
 /**
- * 
+ *
  * @name Embed
  * @description Create a MessageEmbed with ease!
  * @returns MessageEmbed
@@ -96,6 +96,15 @@ export function Embed({
 				Embed.setDescription(
 					`${getEmoji(client, 'successemoji')} ${description}`
 				);
+				if (footer) Embed.setFooter(footer);
+				if (footer && footericon) Embed.setFooter(footer, footericon);
+				if (timestamp) {
+					if (timestamp === true) {
+						Embed.setTimestamp(new Date());
+					} else {
+						Embed.setTimestamp(timestamp);
+					}
+				}
 		}
 	} else {
 		if (author) Embed.setAuthor(author);
@@ -122,7 +131,7 @@ export function Embed({
 }
 
 /**
- * 
+ *
  * @name getEmoji
  * @description Get a custom emoji with ease!
  * @param client Discord Client
@@ -203,7 +212,7 @@ export function formatPermission(permission: string): string {
 }
 
 /**
- * 
+ *
  * @name formatString
  * @description Formats a string
  * @param str String to format
@@ -214,7 +223,7 @@ export function formatString(str: string) {
 }
 
 /**
- * 
+ *
  * @command meme
  * @param client Discord Client
  * @param subreddit Name of the subreddit
@@ -253,7 +262,7 @@ export async function meme(
 }
 
 /**
- * 
+ *
  * @command meme
  * @param client Discord Client
  * @param subreddit Name of the subreddit
@@ -301,7 +310,7 @@ export async function updateMeme(
 }
 
 /**
- * 
+ *
  * @name dbConnect
  * @description Connects to the database
  * @param MongoURI MongoDb connection string
