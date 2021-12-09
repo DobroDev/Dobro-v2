@@ -2,9 +2,9 @@ import {
 	CommandInteractionOptionResolver,
 	ContextMenuInteraction,
 } from 'discord.js';
-import { client } from '../index';
-import { Event } from '../structures';
-import { ExtendInteraction } from '../structures/iSlash';
+import { client } from '../../index';
+import { Event } from '../../structures';
+import { ExtendInteraction } from '../../structures/iSlash';
 
 export default new Event('interactionCreate', async (interaction) => {
 	const { Errors, Bot } = client.config;

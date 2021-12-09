@@ -6,7 +6,7 @@ import { promisify } from 'util';
 const globP = promisify(glob);
 
 export default async (client: Dobro) => {
-	const eventFiles = await globP(`${__dirname}/../events/*{.ts,.js}`);
+	const eventFiles = await globP(`${__dirname}/../events/*/*{.ts,.js}`);
 	eventFiles.forEach(async (file) => {
 		const event: Event<keyof ClientEvents> = await client.utils.importFile(
 			file
