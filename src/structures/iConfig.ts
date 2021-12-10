@@ -17,6 +17,7 @@ interface ConfigFile {
 	Errors: {
 		inDevelopment: string;
 		noPerms: string;
+		internalError: string
 	};
 	GeneralCommands: {
 		Ping: {
