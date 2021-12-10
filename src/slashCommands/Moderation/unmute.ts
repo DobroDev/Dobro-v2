@@ -84,6 +84,15 @@ export default new slashCommand({
 			{ active: false }
 		);
 
+		interaction.reply({
+			embeds: [
+				Embed({
+					description: `<@!${member.user.id}> was **unmuted**`,
+					color: client.config.embedColors.success,
+				}),
+			],
+		});
+
 		const ID = SnowflakeUtil.generate().toString();
 
 		await new infractions({
@@ -95,15 +104,6 @@ export default new slashCommand({
 			reason: reason,
 			timestamp: new Date(),
 		}).save();
-
-		interaction.reply({
-			embeds: [
-				Embed({
-					description: `<@!${member.user.id}> was **unmuted**`,
-					color: client.config.embedColors.success,
-				}),
-			],
-		});
 
 		member.user
 			.send({
