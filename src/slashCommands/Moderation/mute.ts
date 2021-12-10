@@ -48,7 +48,8 @@ export default new slashCommand({
 				embeds: [
 					client.utils.Embed({
 						presets: 'ERROR',
-						description: 'There is currently no mute role set for this guild',
+						description:
+							'There is currently no mute role set for this guild. You can configure it by running `/settings muterole_set`',
 					}),
 				],
 				ephemeral: true,

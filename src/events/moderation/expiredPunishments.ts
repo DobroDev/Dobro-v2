@@ -1,8 +1,9 @@
 import { Event } from '../../structures';
 import infractions from '../../lib/models/infractions';
 import Guild from '../../lib/models/guild';
+import { Dobro } from '../../lib/client/Dobro';
 
-export default new Event('ready', async (client) => {
+export default new Event('ready', async (client: Dobro) => {
 	const check = async () => {
 		const dbQuery = {
 			expires: { $lt: new Date() },
@@ -12,7 +13,7 @@ export default new Event('ready', async (client) => {
 		const punishments = await infractions.find(dbQuery);
 
 		for (const p of punishments) {
-			const { guildId, userId, type } = p;
+			const { guildId, infractionId, userId, type } = p;
 
 			const guild = await client.guilds.fetch(guildId);
 			if (!guild) continue;
@@ -27,6 +28,17 @@ export default new Event('ready', async (client) => {
 				if (!member) continue;
 
 				member.roles.remove(muteRole).catch((err: any) => {});
+				member.user
+					.send({
+						embeds: [
+							client.utils.Embed({
+								description: `You were unmuted in ${guild.name} | Reason: [Automatic] Mute expired.`,
+								color: 'GREEN',
+								footer: `ID: ${infractionId}`,
+							}),
+						],
+					})
+					.catch((err: any) => {});
 			}
 		}
 		await infractions.updateMany(dbQuery, { active: false });
