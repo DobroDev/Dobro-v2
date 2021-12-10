@@ -19,6 +19,7 @@
   "author": "NickR69420",
   "license": "GNU",
   "dependencies": {
+    "@sapphire/time-utilities": "^1.5.0",
     "axios": "^0.24.0",
     "canvas": "^2.8.0",
     "chalk": "^4.1.2",
