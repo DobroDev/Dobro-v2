@@ -1,10 +1,21 @@
-import mongoose, { Schema } from 'mongoose';
-import { rString } from '../../structures/';
+import { Schema, model, Document } from 'mongoose';
+import { rString, rDate } from '../../structures/';
+
+export interface Infraction extends Document {
+	guildId: string;
+	infractionId: string;
+	userId: string;
+	moderatorId: string;
+	type: 'ban' | 'mute' | 'warn';
+	reason: string;
+	timestamp: Date;
+	expires: Date;
+}
 
 const punishType = {
 	type: String,
 	required: true,
-	enum: ['ban', 'mute'],
+	enum: ['ban', 'mute', 'warn'],
 };
 
 const infractionSchema = new Schema(
@@ -14,11 +25,8 @@ const infractionSchema = new Schema(
 		userId: rString,
 		moderatorId: rString,
 		type: punishType,
-        reason: rString,
-        timestamp: {
-            type: Date,
-            required: true
-        },
+		reason: rString,
+		timestamp: rDate,
 		expires: Date,
 	},
 	{ timestamps: true }
@@ -26,4 +34,4 @@ const infractionSchema = new Schema(
 
 const name = 'infractions';
 
-export default mongoose.models[name] || mongoose.model(name, infractionSchema);
+export default model<Infraction>(name, infractionSchema);

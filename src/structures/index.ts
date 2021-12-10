@@ -1,4 +1,4 @@
-export { rString } from './mongoDB';
+export { rString, rDate } from './mongoDB';
 
 export { iSlash } from './iSlash';
 export { iContext } from './iContext';
