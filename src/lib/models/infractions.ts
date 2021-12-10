@@ -6,7 +6,7 @@ export interface Infraction extends Document {
 	infractionId: string;
 	userId: string;
 	moderatorId: string;
-	type: 'ban' | 'mute' | 'warn' | 'unmute' | 'unban';
+	type: 'ban' | 'mute' | 'warn' | 'unmute';
 	reason: string;
 	timestamp: Date;
 	expires: Date;
@@ -16,7 +16,7 @@ export interface Infraction extends Document {
 const punishType = {
 	type: String,
 	required: true,
-	enum: ['ban', 'mute', 'warn', 'unmute', 'unban'],
+	enum: ['ban', 'mute', 'warn', 'unmute'],
 };
 
 const infractionSchema = new Schema({
