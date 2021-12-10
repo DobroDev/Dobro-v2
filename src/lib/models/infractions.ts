@@ -32,6 +32,4 @@ const infractionSchema = new Schema(
 	{ timestamps: true }
 );
 
-const name = 'infractions';
-
-export default model<Infraction>(name, infractionSchema);
+export default model<Infraction>('Infractions', infractionSchema);
