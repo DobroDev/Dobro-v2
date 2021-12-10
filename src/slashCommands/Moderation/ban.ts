@@ -54,13 +54,13 @@ export default new slashCommand({
 			});
 		}
 
+		const ID = SnowflakeUtil.generate().toString();
+
 		try {
 			await member.ban({
 				reason: `Banned by ${staffMember.user.tag}. Reason: ${reason}`,
 				days: 7,
 			});
-
-			const ID = SnowflakeUtil.generate().toString();
 
 			await new infractions({
 				guildId: guild.id,
@@ -70,6 +70,7 @@ export default new slashCommand({
 				type: 'ban',
 				reason: reason,
 				timestamp: new Date(),
+				active: true,
 			}).save();
 		} catch (e) {
 			client.consola.error(e);
@@ -100,6 +101,7 @@ export default new slashCommand({
 					Embed({
 						description: `You were banned in ${guild.name} | Reason: ${reason}`,
 						color: 'RED',
+						footer: `ID: ${ID}`,
 					}),
 				],
 			})

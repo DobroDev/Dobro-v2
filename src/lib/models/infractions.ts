@@ -1,5 +1,5 @@
 import { Schema, model, Document } from 'mongoose';
-import { rString, rDate } from '../../structures/';
+import { rString, rDate, rBoolean } from '../../structures/';
 
 export interface Infraction extends Document {
 	guildId: string;
@@ -10,6 +10,7 @@ export interface Infraction extends Document {
 	reason: string;
 	timestamp: Date;
 	expires: Date;
+	active: boolean;
 }
 
 const punishType = {
@@ -18,18 +19,16 @@ const punishType = {
 	enum: ['ban', 'mute', 'warn'],
 };
 
-const infractionSchema = new Schema(
-	{
-		guildId: rString,
-		infractionId: rString,
-		userId: rString,
-		moderatorId: rString,
-		type: punishType,
-		reason: rString,
-		timestamp: rDate,
-		expires: Date,
-	},
-	{ timestamps: true }
-);
+const infractionSchema = new Schema({
+	guildId: rString,
+	infractionId: rString,
+	userId: rString,
+	moderatorId: rString,
+	type: punishType,
+	reason: rString,
+	timestamp: rDate,
+	expires: Date,
+	active: rBoolean,
+});
 
 export default model<Infraction>('Infractions', infractionSchema);
