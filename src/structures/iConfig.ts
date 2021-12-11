@@ -13,11 +13,12 @@ interface ConfigFile {
 	embedColors: {
 		error: HexColorString;
 		success: HexColorString;
+		default: HexColorString;
 	};
 	Errors: {
 		inDevelopment: string;
 		noPerms: string;
-		internalError: string
+		internalError: string;
 	};
 	GeneralCommands: {
 		Ping: {

@@ -38,7 +38,7 @@ export default new slashCommand({
 					{
 						Id: guild.id,
 					},
-					{ muterole: selectedRole.id }
+					{ muteRole: selectedRole.id }
 				).catch((err) => {
 					client.consola.error(new Error(err));
 					interaction.reply({
@@ -83,7 +83,8 @@ export default new slashCommand({
 				interaction.reply({
 					embeds: [
 						client.utils.Embed({
-							description: `The current mute role for this guild is ${role}`,
+							description: `The current mute role for this guild is <@&${role.id}>`,
+							color: client.config.embedColors.default,
 						}),
 					],
 				});

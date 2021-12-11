@@ -48,7 +48,7 @@ export default new slashCommand({
 			return;
 		}
 
-		const mutedCheck = infractions.findOne({
+		const mutedCheck = infractions.find({
 			guildId: guild.id,
 			userId: member.id,
 			type: 'mute',
@@ -56,7 +56,7 @@ export default new slashCommand({
 		});
 
 		if (!mutedCheck || !member.roles.cache.has(data.muteRole)) {
-			return interaction.reply({
+			interaction.reply({
 				embeds: [
 					Embed({
 						presets: 'ERROR',
@@ -65,19 +65,26 @@ export default new slashCommand({
 				],
 				ephemeral: true,
 			});
+
+			return;
 		}
 
-		member.roles.remove(muteRole).catch((err: any) => {
-			return interaction.reply({
-				embeds: [
-					Embed({
-						presets: 'ERROR',
-						description: 'That user is not muted!',
-					}),
-				],
-				ephemeral: true,
+		await member.roles
+			.remove(
+				muteRole,
+				`Unmuted by: ${staffMember.user.tag}. Reason: ${reason}`
+			)
+			.catch((err: any) => {
+				return interaction.reply({
+					embeds: [
+						Embed({
+							presets: 'ERROR',
+							description: 'That user is not muted!',
+						}),
+					],
+					ephemeral: true,
+				});
 			});
-		});
 
 		await infractions.updateMany(
 			{ guildId: guild.id, userId: member.id, type: 'mute', active: true },
@@ -110,8 +117,9 @@ export default new slashCommand({
 				embeds: [
 					client.utils.Embed({
 						description: `You were unmuted in ${guild.name} | Reason: ${reason}`,
-						color: 'GREEN',
+						color: client.config.embedColors.success,
 						footer: `ID: ${ID}`,
+						timestamp: true,
 					}),
 				],
 			})

@@ -21,13 +21,15 @@ export default new Event('ready', async (client: Dobro) => {
 			if (type === 'mute') {
 				const data = await Guild.findOne({ Id: guild.id });
 
-				const muteRole = await guild.roles.fetch(data.muteRole);
+				const muteRole = await guild.roles
+					.fetch(data.muteRole)
+					.catch((e: any) => {});
 				if (!muteRole) continue;
 
 				const member = guild.members.cache.get(userId);
 				if (!member) continue;
 
-				member.roles.remove(muteRole).catch((err: any) => {});
+				member.roles.remove(muteRole, `[Automatic] Mute expired`).catch((err: any) => {});
 				member.user
 					.send({
 						embeds: [

@@ -15,7 +15,7 @@ export default new slashCommand({
 			name: 'user',
 			description: 'The user you want to mute.',
 			type: 'USER',
-			required: false,
+			required: true,
 		},
 		{
 			name: 'duration',
@@ -41,7 +41,7 @@ export default new slashCommand({
 
 		const data = await Guild.findOne({ Id: guild.id });
 
-		const muteRole = await guild.roles.fetch(data.muteRole);
+		const muteRole = guild.roles.cache.get(data.muteRole);
 
 		if (!muteRole) {
 			interaction.reply({
@@ -68,7 +68,7 @@ export default new slashCommand({
 		}
 
 		if (
-			(guild.ownerId !== staffMember.id &&
+			((await guild.fetchOwner()).id !== staffMember.id &&
 				member.roles.highest.position > staffMember.roles.highest.position) ||
 			member.roles.highest.position === staffMember.roles.highest.position
 		) {
@@ -83,21 +83,14 @@ export default new slashCommand({
 			});
 		}
 
-		const time = new Duration(duration).fromNow;
+		const time = new Duration(duration).fromNow || null;
 		const expires =
 			!isNaN(time.getTime()) && time.getTime() > Date.now()
 				? new Date(time)
 				: null;
 
-		const mutedCheck = infractions.findOne({
-			guildId: guild.id,
-			userId: member.id,
-			type: 'mute',
-			active: true,
-		});
-
-		if (mutedCheck || member.roles.cache.has(data.muteRole)) {
-			return interaction.reply({
+		if (member.roles.cache.has(muteRole.id)) {
+			interaction.reply({
 				embeds: [
 					Embed({
 						presets: 'ERROR',
@@ -106,12 +99,17 @@ export default new slashCommand({
 				],
 				ephemeral: true,
 			});
+
+			return;
 		}
 
 		const ID = SnowflakeUtil.generate().toString();
 
 		try {
-			member.roles.add(muteRole);
+			await member.roles.add(
+				muteRole,
+				`Muted by: ${staffMember.user.tag}. Reason: ${reason}`
+			);
 
 			await new infractions({
 				guildId: guild.id,
@@ -122,6 +120,7 @@ export default new slashCommand({
 				reason: reason,
 				timestamp: new Date(),
 				expires: expires,
+				active: true,
 			}).save();
 		} catch (e) {
 			interaction.reply({
@@ -160,6 +159,7 @@ export default new slashCommand({
 						}`,
 						footer: `ID: ${ID}`,
 						color: 'RED',
+						timestamp: true,
 					}),
 				],
 			})
