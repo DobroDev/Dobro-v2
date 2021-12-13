@@ -1,7 +1,7 @@
 import { Client, Collection, Util } from 'discord.js';
 import { iSlash } from '../typings/iSlash';
 import { iCommand } from '../typings/iCommand';
-import * as config from '../../config';
+import * as config from '../../config.example';
 import consola from 'consola';
 import chalk from 'chalk';
 import Utils from '../utils/Utils';
