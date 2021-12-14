@@ -103,6 +103,22 @@ export default class Utils {
 		});
 		return splitFixed.join(' ');
 	}
+
+	public async ArgsMember(
+		message: Message,
+		args: string[],
+		includeAuthor?: boolean
+	) {
+		const member =
+			message.mentions.members.first() ||
+			message.guild.members.cache.find((m) => m.id === args[0]);
+
+		if (includeAuthor) {
+			return member || message.member;
+		} else {
+			return member;
+		}
+	}
 }
 
 export interface iRegister {
