@@ -1,4 +1,4 @@
-import { Client, Collection, Util } from 'discord.js';
+import { Client, Collection } from 'discord.js';
 import { iSlash } from '../typings/iSlash';
 import { iCommand } from '../typings/iCommand';
 import * as config from '../../config.example';
