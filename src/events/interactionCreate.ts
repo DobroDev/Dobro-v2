@@ -33,7 +33,9 @@ export default new Event('interactionCreate', async (interaction) => {
 			return interaction.reply({
 				embeds: [
 					client.embeds.create({
-						description: `You are missing the \`${command.userPerms}\` permission to run this command!`,
+						description: `You are missing the **${client.utils.formatPerm(
+							`${command.userPerms}`
+						)}** permission to run this command!`,
 					}),
 				],
 				ephemeral: true,

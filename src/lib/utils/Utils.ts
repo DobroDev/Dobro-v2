@@ -2,13 +2,13 @@ import {
 	ApplicationCommandDataResolvable,
 	Message,
 	MessageEmbed,
-	MessagePayload,
 } from 'discord.js';
 import { Dobro } from '../structures/Client';
 
 export default class Utils {
 	/**
 	 *
+	 * Import a command with ease.
 	 * @param filePath The path of the file to import.
 	 * @example ```ts
 	 *  importFile('../../command.ts')
@@ -48,6 +48,15 @@ export default class Utils {
 		}
 	}
 
+	/**
+	 *
+	 * Reply to a user without pinging them coz it looks cool.
+	 * @param message Message.
+	 * @param options The content or Embed to send.
+	 * @example```ts
+	 * inlineReply(message, { content: 'Hello World!'});
+	 * ```
+	 */
 	public inlineReply(
 		message: Message,
 		options: { content?: string; embed?: MessageEmbed }
@@ -74,6 +83,25 @@ export default class Utils {
 		);
 
 		return emoji;
+	}
+
+	/**
+	 *
+	 * Formats a Discord Permission.
+	 * @param permission The permission to format.
+	 * @example```ts
+	 * formatPerm('SEND_MESSAGES');
+	 * ```
+	 */
+	public formatPerm(permission: string) {
+		permission = permission.replace(/\_/g, ' ');
+		const split = permission.trim().split(' ');
+		const splitFixed = [];
+		split.forEach((e) => {
+			e = e.charAt(0).toUpperCase() + e.slice(1).toLocaleLowerCase();
+			splitFixed.push(e);
+		});
+		return splitFixed.join(' ');
 	}
 }
 

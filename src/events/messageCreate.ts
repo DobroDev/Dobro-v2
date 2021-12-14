@@ -27,7 +27,9 @@ export default new Event('messageCreate', async (message) => {
 		return client.utils.inlineReply(message, {
 			embed: client.embeds.create({
 				title: 'Missing Permissions',
-				description: `You are missing the \`${command.userPerms}\` permission to run this command!`,
+				description: `You are missing the **${client.utils.formatPerm(
+					`${command.userPerms}`
+				)}** permission to run this command!`,
 			}),
 		});
 	}
