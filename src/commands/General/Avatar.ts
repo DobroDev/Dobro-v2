@@ -16,6 +16,7 @@ export default new Command({
 					author: member.user.tag,
 					icon: member.user.displayAvatarURL(),
 					image: member.user.displayAvatarURL({ size: 1024 }),
+					color: 'RANDOM',
 				}),
 			],
 		});
