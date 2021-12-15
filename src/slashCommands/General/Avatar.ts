@@ -24,7 +24,7 @@ export default new SlashCommand({
 			],
 		},
 		{
-			name: 'member',
+			name: 'target',
 			description: "The member who's avatar you want to view.",
 			type: 'USER',
 			required: false,
@@ -32,7 +32,7 @@ export default new SlashCommand({
 	],
 	run: async ({ client, interaction }) => {
 		const member =
-			(interaction.options.getMember('member') as GuildMember) ||
+			(interaction.options.getMember('target') as GuildMember) ||
 			interaction.member;
 		const optionVal = interaction.options.getNumber('avatar-type');
 

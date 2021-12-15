@@ -1,6 +1,7 @@
 import {
 	ApplicationCommandDataResolvable,
 	Message,
+	MessageActionRow,
 	MessageEmbed,
 } from 'discord.js';
 import { Dobro } from '../structures/Client';
@@ -59,20 +60,24 @@ export default class Utils {
 	 */
 	public inlineReply(
 		message: Message,
-		options: { content?: string; embed?: MessageEmbed }
+		options: { content?: string; embed?: MessageEmbed, components?: MessageActionRow }
 	) {
 		if (options.content) {
 			message.reply({
 				content: options.content,
+				components: options.components ? [options.components] : [],
 				allowedMentions: { repliedUser: false },
 			});
-		} else if (options.embed){
+		} else if (options.embed) {
 			message.reply({
 				content: options.content ? options.content : '',
 				embeds: [options.embed],
+				components: options.components ? [options.components] : [],
 				allowedMentions: { repliedUser: false },
 			});
 		}
+
+		return message;
 	}
 
 	/**
@@ -81,7 +86,7 @@ export default class Utils {
 	 * @param client Discord Client.
 	 * @param options The emoji's name or ID.
 	 * @example ```ts
-	 * getEmoji(client, 'emojiname')
+	 * getEmoji(client, 'emojiname');
 	 * ```
 	 */
 	public getEmoji(client: Dobro, options: string) {
@@ -111,6 +116,16 @@ export default class Utils {
 		return splitFixed.join(' ');
 	}
 
+	/**
+	 *
+	 * Gets the target member for a command.
+	 * @param message Message.
+	 * @param args Message args.
+	 * @param includeAuthor Include message author?
+	 * @example```ts
+	 * ArgsMember(message, args, true);
+	 * ```
+	 */
 	public async ArgsMember(
 		message: Message,
 		args: string[],
@@ -125,6 +140,18 @@ export default class Utils {
 		} else {
 			return member;
 		}
+	}
+
+	/**
+	 *
+	 * Formats a string.
+	 * @param str String to format.
+	 * @example```ts
+	 * formatString('TEST');
+	 * ```
+	 */
+	public formatString(str: string) {
+		return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
 	}
 }
 
