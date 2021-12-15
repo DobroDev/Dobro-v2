@@ -60,7 +60,11 @@ export default class Utils {
 	 */
 	public inlineReply(
 		message: Message,
-		options: { content?: string; embed?: MessageEmbed, components?: MessageActionRow }
+		options: {
+			content?: string;
+			embed?: MessageEmbed;
+			components?: MessageActionRow;
+		}
 	) {
 		if (options.content) {
 			message.reply({
@@ -70,7 +74,7 @@ export default class Utils {
 			});
 		} else if (options.embed) {
 			message.reply({
-				content: options.content ? options.content : '',
+				content: options.content,
 				embeds: [options.embed],
 				components: options.components ? [options.components] : [],
 				allowedMentions: { repliedUser: false },
