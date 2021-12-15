@@ -4,7 +4,7 @@
     <strong>A Multipurpose Discord Bot.</strong><br><br>
     <img src="https://forthebadge.com/images/badges/made-with-typescript.svg" height="30">&nbsp;
     <img src="https://forthebadge.com/images/badges/built-with-love.svg" height="30">&nbsp;
-    <a href="https://discord.gg/T6EKQdv6x5"><img src="https://img.shields.io/discord/849624046958149633.svg?style=for-the-badge" height="30"></a>&nbsp;<br>
+    <a href="https://discord.gg/2auFJB7wUX"><img src="https://img.shields.io/discord/849624046958149633.svg?style=for-the-badge" height="30"></a>&nbsp;<br>
 <a href="https://www.codefactor.io/repository/github/dobrodev/dobro-v2"><img src="https://www.codefactor.io/repository/github/dobrodev/dobro-v2/badge" alt="CodeFactor" /></a>
 </div>
 
