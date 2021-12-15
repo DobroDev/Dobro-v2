@@ -61,11 +61,18 @@ export default class Utils {
 		message: Message,
 		options: { content?: string; embed?: MessageEmbed }
 	) {
-		message.reply({
-			content: options.content,
-			embeds: [options.embed],
-			allowedMentions: { repliedUser: false },
-		});
+		if (options.content) {
+			message.reply({
+				content: options.content,
+				allowedMentions: { repliedUser: false },
+			});
+		} else if (options.embed){
+			message.reply({
+				content: options.content ? options.content : '',
+				embeds: [options.embed],
+				allowedMentions: { repliedUser: false },
+			});
+		}
 	}
 
 	/**
