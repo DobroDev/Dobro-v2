@@ -31,6 +31,7 @@ export async function meme({ client, channel }: createM) {
 			url: data.postLink,
 			image: data.url,
 			footer: `👍 ${data.ups}`,
+			color: 'RANDOM',
 		});
 	} catch (err) {
 		return globalErr('The api seems to be down');
