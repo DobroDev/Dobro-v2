@@ -56,7 +56,7 @@ export default class Embeds {
 	 *
 	 * Sends an error message.
 	 * @param description The error message.
-	 * @param timestamp Timestamp?
+	 * @param footer Optional
 	 * @example ```ts
 	 * interaction.reply({ embeds: [client.embeds.globalErr('Error Occured')] });
 	 * ```
