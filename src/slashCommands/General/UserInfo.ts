@@ -21,7 +21,7 @@ export default new SlashCommand({
 		},
 	],
 	run: async ({ client, interaction }) => {
-		const { inlineReply, ArgsMember, getEmoji, formatString } = client.utils;
+		const { getEmoji, formatString } = client.utils;
 		const member =
 			(interaction.options.getMember('target') as GuildMember) ||
 			interaction.member;
