@@ -1,5 +1,6 @@
 import { Client, Collection } from 'discord.js';
 import { iSlash } from '../typings/iSlash';
+import { iContext } from '../typings/iContext';
 import { iCommand } from '../typings/iCommand';
 import * as config from '../../config.example';
 import consola from 'consola';
@@ -15,6 +16,7 @@ export class Dobro extends Client {
 	public commands: Collection<string, iCommand> = new Collection();
 	public aliases: Collection<string, string> = new Collection();
 	public slashCommands: Collection<string, iSlash> = new Collection();
+	public contextMenus: Collection<string, iContext> = new Collection();
 	public config = config;
 	public utils = new Utils();
 	public embeds = new Embeds();

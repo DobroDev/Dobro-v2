@@ -3,6 +3,7 @@ import { Dobro } from '../structures/Client';
 import glob from 'glob';
 import { promisify } from 'util';
 import { iSlash } from '../typings/iSlash';
+import { iContext } from '../typings/iContext';
 const globP = promisify(glob);
 
 export default async (client: Dobro) => {
@@ -22,6 +23,21 @@ export default async (client: Dobro) => {
 		}
 		client.slashCommands.set(slash.name, slash);
 		globalCommands.push(slash);
+	});
+
+	const contextFiles = await globP(
+		`${__dirname}/../../contextMenus/*{.ts,.js}`
+	);
+	contextFiles.forEach(async (filePath) => {
+		const menu: iContext = await client.utils.importFile(filePath);
+		if (!menu.name || !menu.type) return;
+
+		if (menu.inDevelopment) {
+			client.contextMenus.set(menu.name, menu);
+			devCommands.push(menu);
+		}
+		client.contextMenus.set(menu.name, menu);
+		globalCommands.push(menu);
 	});
 
 	client.on('ready', async (client: Dobro) => {

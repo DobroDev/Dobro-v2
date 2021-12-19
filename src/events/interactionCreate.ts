@@ -1,4 +1,7 @@
-import { CommandInteractionOptionResolver } from 'discord.js';
+import {
+	CommandInteractionOptionResolver,
+	ContextMenuInteraction,
+} from 'discord.js';
 import { client } from '../index';
 import { Event } from '../lib/structures/Event';
 import { CInteraction } from '../lib/typings/iSlash';
@@ -51,6 +54,54 @@ export default new Event('interactionCreate', async (interaction) => {
 		} catch (err) {
 			client.logger.error(new Error(err));
 
+			if (interaction.replied) {
+				interaction
+					.followUp({
+						content: ':x: Something went wrong.. Please contact a developer!',
+						ephemeral: true,
+					})
+					.catch((e: any) => {
+						client.logger.error(new Error(e));
+					});
+				return;
+			} else {
+				interaction.reply({
+					content: ':x: Something went wrong.. Please contact a developer!',
+					ephemeral: true,
+				});
+			}
+		}
+	}
+
+	if (interaction.isContextMenu()) {
+		const menu = client.contextMenus.get(interaction.commandName);
+
+		if (!menu)
+			return interaction.reply({
+				content: ':x: Something went wrong..',
+				ephemeral: true,
+			});
+
+		if (!interaction.memberPermissions.has(menu.userPerms || [])) {
+			return interaction.reply({
+				embeds: [
+					client.embeds.create({
+						description: `You are missing the **${client.utils.formatPerm(
+							`${menu.userPerms}`
+						)}** permission to run this command!`,
+					}),
+				],
+				ephemeral: true,
+			});
+		}
+
+		try {
+			menu.run({
+				ctx: interaction as ContextMenuInteraction,
+				client,
+			});
+		} catch (err) {
+			client.logger.error(new Error(err));
 			if (interaction.replied) {
 				interaction
 					.followUp({
