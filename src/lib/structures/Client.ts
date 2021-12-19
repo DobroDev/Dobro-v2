@@ -2,7 +2,6 @@ import { Client, Collection } from 'discord.js';
 import { iSlash } from '../typings/iSlash';
 import { iContext } from '../typings/iContext';
 import { iCommand } from '../typings/iCommand';
-import { PrismaClient } from '@prisma/client'
 import * as config from '../../config.example';
 import consola from 'consola';
 import chalk from 'chalk';
@@ -21,7 +20,6 @@ export class Dobro extends Client {
 	public config = config;
 	public utils = new Utils();
 	public embeds = new Embeds();
-	public db = new PrismaClient()
 	public color = chalk;
 	public logger = consola;
 	public constructor() {
