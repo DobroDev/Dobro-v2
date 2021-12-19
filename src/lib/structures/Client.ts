@@ -5,6 +5,7 @@ import { iCommand } from '../typings/iCommand';
 import * as config from '../../config.example';
 import consola from 'consola';
 import chalk from 'chalk';
+import mongoose from 'mongoose';
 import Utils from '../utils/Utils';
 import Embeds from '../utils/Embeds';
 
@@ -30,8 +31,14 @@ export class Dobro extends Client {
 	}
 
 	init() {
+		this.db();
 		this.loadModules();
 		this.clientLogin();
+	}
+
+	async db() {
+		await mongoose.connect(config.MongoURI);
+		this.logger.log(this.color.green('[Database] Connected.'));
 	}
 
 	clientLogin() {

@@ -1,9 +1,8 @@
 import { HexColorString } from 'discord.js';
 
-export const token =
-	'';
-export const devToken =
-	'';
+export const token = '';
+export const devToken = '';
+export const MongoURI = '';
 export const prefix = '';
 export const devServer = '';
 export const dev = true;
