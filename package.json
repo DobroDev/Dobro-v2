@@ -27,6 +27,7 @@
   "homepage": "https://github.com/dobrodev/Dobro-v2#readme",
   "dependencies": {
     "axios": "^0.24.0",
+    "canvas": "^2.8.0",
     "chalk": "^4.1.2",
     "consola": "^2.15.3",
     "discord-image-generation": "^1.4.9",
