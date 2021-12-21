@@ -8,7 +8,7 @@ export default new Command({
 	usage: 'uptime',
 	userPerms: ['SEND_MESSAGES'],
 	run: async ({ client, message }) => {
-		client.utils.inlineReply(message, {
+		await client.inlineReply(message, {
 			content: `I have been online for **${ms(client.uptime, {
 				compact: false,
 				verbose: true,

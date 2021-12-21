@@ -32,14 +32,12 @@ export default new Command({
 			);
 		}
 
-		const m = await message.channel.send({
-			embeds: [
-				client.embeds.create({
-					description: 'Rock, Paper or Scissors?',
-					color: 'RANDOM',
-				}),
-			],
-			components: [row(false, false, false)],
+		const m = await client.inlineReply(message, {
+			embed: client.embeds.create({
+				description: 'Rock, Paper or Scissors?',
+				color: 'RANDOM',
+			}),
+			components: row(false, false, false),
 		});
 
 		const collector = m.channel.createMessageComponentCollector({

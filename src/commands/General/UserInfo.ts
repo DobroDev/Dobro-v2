@@ -14,7 +14,7 @@ export default new Command({
 	examples: ['userinfo @Nickk', 'userinfo 775265751954096138'],
 	userPerms: ['SEND_MESSAGES'],
 	run: async ({ client, message, args }) => {
-		const { inlineReply, ArgsMember, getEmoji, formatString } = client.utils;
+		const { ArgsMember, getEmoji, formatString } = client.utils;
 		const member = await ArgsMember(message, args, true);
 
 		const userFlags = member.user.flags.toArray();

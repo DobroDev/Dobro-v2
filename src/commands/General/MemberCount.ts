@@ -7,7 +7,7 @@ export default new Command({
 	usage: 'membercount',
 	userPerms: ['SEND_MESSAGES'],
 	run: async ({ client, message }) => {
-		client.utils.inlineReply(message, {
+		await client.inlineReply(message, {
 			embed: client.embeds.create({
 				fields: [{ name: 'Members', value: `${message.guild.memberCount}` }],
 				timestamp: true,

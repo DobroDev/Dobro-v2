@@ -15,7 +15,7 @@ export default new Command({
 			const parser = new Parser();
 			const math = parser.evaluate(equation);
 
-			client.utils.inlineReply(message, {
+			await client.inlineReply(message, {
 				embed: client.embeds.create({
 					title: '\\➗ Math',
 					fields: [
@@ -32,7 +32,7 @@ export default new Command({
 				}),
 			});
 		} catch (err) {
-			client.utils.inlineReply(message, {
+			await client.inlineReply(message, {
 				embed: client.embeds.globalErr('Failed to evaluate the equation'),
 			});
 		}

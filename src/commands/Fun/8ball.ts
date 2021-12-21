@@ -21,7 +21,7 @@ export default new Command({
 				`https://8ball.delegator.com/magic/JSON/${encodeURIComponent(question)}`
 			);
 
-			client.utils.inlineReply(message, {
+			await client.inlineReply(message, {
 				embed: client.embeds.create({
 					author: question,
 					icon: client.user.displayAvatarURL(),
@@ -29,7 +29,7 @@ export default new Command({
 				}),
 			});
 		} catch (err) {
-			client.utils.inlineReply(message, {
+			await client.inlineReply(message, {
 				content: 'The api seems to be down :(',
 			});
 		}

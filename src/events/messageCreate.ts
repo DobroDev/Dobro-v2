@@ -24,7 +24,7 @@ export default new Event('messageCreate', async (message) => {
 		return;
 
 	if (!message.member.permissions.has(command.userPerms || [])) {
-		return client.utils.inlineReply(message, {
+		return await client.inlineReply(message, {
 			embed: client.embeds.create({
 				title: 'Missing Permissions',
 				description: `You are missing the **${client.utils.formatPerm(
@@ -35,7 +35,7 @@ export default new Event('messageCreate', async (message) => {
 	}
 
 	if (command.minArgs && command.minArgs > args.length) {
-		return client.utils.inlineReply(message, {
+		return await client.inlineReply(message, {
 			embed: client.embeds.create({
 				title: '\\❌ Missing Arguments!',
 				description: command.examples

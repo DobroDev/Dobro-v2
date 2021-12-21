@@ -48,42 +48,7 @@ export default class Utils {
 			);
 		}
 	}
-
-	/**
-	 *
-	 * Reply to a user without pinging them coz it looks cool.
-	 * @param message Message.
-	 * @param options The content or Embed to send.
-	 * @example```ts
-	 * inlineReply(message, { content: 'Hello World!'});
-	 * ```
-	 */
-	public inlineReply(
-		message: Message,
-		options: {
-			content?: string;
-			embed?: MessageEmbed;
-			components?: MessageActionRow;
-		}
-	) {
-		if (options.content) {
-			message.reply({
-				content: options.content,
-				components: options.components ? [options.components] : [],
-				allowedMentions: { repliedUser: false },
-			});
-		} else if (options.embed) {
-			message.reply({
-				content: options.content,
-				embeds: [options.embed],
-				components: options.components ? [options.components] : [],
-				allowedMentions: { repliedUser: false },
-			});
-		}
-
-		return message;
-	}
-
+	
 	/**
 	 *
 	 * Get a custom emoji with ease!

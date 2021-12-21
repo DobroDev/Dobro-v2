@@ -1,4 +1,10 @@
-import { Client, Collection } from 'discord.js';
+import {
+	Client,
+	Collection,
+	Message,
+	MessageActionRow,
+	MessageEmbed,
+} from 'discord.js';
 import { iSlash } from '../typings/iSlash';
 import { iContext } from '../typings/iContext';
 import { iCommand } from '../typings/iCommand';
@@ -61,5 +67,29 @@ export class Dobro extends Client {
 		eventHandler(this);
 		commandHandler(this);
 		SlashHandler(this);
+	}
+
+	public async inlineReply(
+		message: Message,
+		options: {
+			content?: string;
+			embed?: MessageEmbed;
+			components?: MessageActionRow;
+		}
+	) {
+		if (options.content) {
+			return await message.reply({
+				content: options.content,
+				components: options.components ? [options.components] : [],
+				allowedMentions: { repliedUser: false },
+			});
+		} else if (options.embed) {
+			return await message.reply({
+				content: options.content,
+				embeds: [options.embed],
+				components: options.components ? [options.components] : [],
+				allowedMentions: { repliedUser: false },
+			});
+		}
 	}
 }

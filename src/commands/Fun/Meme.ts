@@ -21,9 +21,9 @@ export default new Command({
 				.setEmoji(client.utils.getEmoji(client, '918877980896428062'))
 		);
 
-		const m = await message.channel.send({
-			embeds: [await meme({ client: client, channel: message.channel })],
-			components: [row],
+		const m = await client.inlineReply(message, {
+			embed: await meme({ client: client, channel: message.channel }),
+			components: row,
 		});
 
 		const collector = m.channel.createMessageComponentCollector({

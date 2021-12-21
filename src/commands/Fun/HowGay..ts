@@ -11,7 +11,7 @@ export default new Command({
 		const { user } = await client.utils.ArgsMember(message, args, true);
 		const gayness = Math.floor(Math.random() * 101);
 
-		client.utils.inlineReply(message, {
+		await client.inlineReply(message, {
 			embed: client.embeds.create({
 				title: 'Gay Machine Calculator',
 				description: `${user.username} is ${gayness}% Gay.`,

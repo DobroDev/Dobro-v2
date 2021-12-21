@@ -19,13 +19,13 @@ export default new Command({
 		const side =
 			Object.keys(Sides)[Math.floor(Math.random() * Object.keys(Sides).length)];
 
-		const m = await message.channel.send({
-			embeds: [
+		const m = await client.inlineReply(message, {
+			embed:
 				client.embeds.create({
 					description: 'Rolling...',
 					color: 'RANDOM',
 				}),
-			],
+		
         });
         
         m.edit({

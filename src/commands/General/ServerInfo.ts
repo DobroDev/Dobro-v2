@@ -33,7 +33,7 @@ export default new Command({
 						.slice(0, 25)
 						.join(' ') + ' and more...';
 
-		client.utils.inlineReply(message, {
+		await client.inlineReply(message, {
 			embed: client.embeds.create({
 				author: guild.name,
 				icon: guild.iconURL() || unknownIcon,
@@ -73,8 +73,8 @@ export default new Command({
 					},
 				],
 				footer: `ID: ${guild.id}`,
-                timestamp: true,
-                color: 'RANDOM'
+				timestamp: true,
+				color: 'RANDOM',
 			}),
 		});
 	},

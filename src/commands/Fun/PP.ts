@@ -12,7 +12,7 @@ export default new Command({
 
 		const pp = makePP(Math.floor(Math.random() * 10) + 1 - 1 + 1);
 
-		client.utils.inlineReply(message, {
+		await client.inlineReply(message, {
 			embed: client.embeds.create({
 				title: '`PP Size Machine`',
 				description: `${user.username}'s penis\n8${pp}D`,

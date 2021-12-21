@@ -12,7 +12,7 @@ export default new Command({
 	run: async ({ client, message, args }) => {
 		const { user } = await client.utils.ArgsMember(message, args, true);
 
-		const m = await message.channel.send({
+		const m = await client.inlineReply(message, {
 			content: `${client.utils.getEmoji(
 				client,
 				'amogus'

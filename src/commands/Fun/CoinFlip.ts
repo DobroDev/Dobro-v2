@@ -7,14 +7,13 @@ export default new Command({
 	usage: 'coinflip',
 	userPerms: ['SEND_MESSAGES'],
 	run: async ({ client, message }) => {
-		const { inlineReply } = client.utils;
-
 		const choices = ['Heads', 'Tails'];
 		const output = choices[~~(Math.random() * choices.length)];
 
-		const m = await message.channel.send(
-			'https://cdn.discordapp.com/emojis/776154502826557470.gif?size=64'
-		);
+		const m = await client.inlineReply(message, {
+			content:
+				'https://cdn.discordapp.com/emojis/776154502826557470.gif?size=64',
+		});
 
 		setTimeout(() => {
 			m.edit(`**${output}!**`);

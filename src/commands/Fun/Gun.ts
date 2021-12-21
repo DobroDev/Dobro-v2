@@ -18,7 +18,7 @@ export default new Command({
 			})}`
 		).attachment;
 
-		client.utils.inlineReply(message, {
+		await client.inlineReply(message, {
 			embed: client.embeds.create({
 				title: "Who's the badass now?",
 				image: img as string,
