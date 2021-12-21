@@ -12,6 +12,7 @@ import Embeds from '../utils/Embeds';
 import SlashHandler from '../handlers/SlashHandler';
 import eventHandler from '../handlers/eventHandler';
 import commandHandler from '../handlers/commandHandler';
+import DbUtils from '../utils/DbUtils';
 
 export class Dobro extends Client {
 	public commands: Collection<string, iCommand> = new Collection();
@@ -21,6 +22,7 @@ export class Dobro extends Client {
 	public config = config;
 	public utils = new Utils();
 	public embeds = new Embeds();
+	public db = new DbUtils();
 	public color = chalk;
 	public logger = consola;
 	public constructor() {
@@ -31,12 +33,12 @@ export class Dobro extends Client {
 	}
 
 	init() {
-		this.db();
+		this.dbConnect();
 		this.loadModules();
 		this.clientLogin();
 	}
 
-	async db() {
+	async dbConnect() {
 		await mongoose.connect(config.MongoURI);
 		this.logger.log(this.color.green('[Database] Connected.'));
 	}
