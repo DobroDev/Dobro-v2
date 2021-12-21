@@ -72,17 +72,17 @@ export default class Embeds {
 
 	/**
 	 *
-	 * Sends an error message.
-	 * @param description The error message.
+	 * Sends a success message.
+	 * @param description The message.
 	 * @param timestamp Timestamp?
 	 * @example ```ts
-	 * interaction.reply({ embeds: [client.embeds.globalErr('Error Occured')] });
+	 * interaction.reply({ embeds: [client.embeds.globalSuccess('Success!')] });
 	 * ```
 	 */
 	public globalSuccess(description: string, footer?: string) {
 		const Embed = new MessageEmbed().setDescription(
 			`${client.utils.getEmoji(client, 'successemoji')} ${description}`
-		);
+		).setColor(client.config.colors.success)
 		if (footer) Embed.setFooter(footer);
 
 		return Embed;
