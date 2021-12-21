@@ -13,7 +13,7 @@ export default new ContextMenu({
 				client.embeds.create({
 					author: member.user.tag,
 					icon: member.user.displayAvatarURL(),
-					image: member.user.displayAvatarURL(),
+					image: member.user.displayAvatarURL({ size: 1024 }),
 					color: 'RANDOM',
 				}),
 			],
