@@ -1,10 +1,7 @@
-import {
-	ApplicationCommandDataResolvable,
-	Message,
-	MessageActionRow,
-	MessageEmbed,
-} from 'discord.js';
+import { ApplicationCommandDataResolvable, Message } from 'discord.js';
 import { Dobro } from '../structures/Client';
+import { Duration } from '@sapphire/time-utilities';
+import ms, { StringValue } from 'ms';
 
 export default class Utils {
 	/**
@@ -48,7 +45,7 @@ export default class Utils {
 			);
 		}
 	}
-	
+
 	/**
 	 *
 	 * Get a custom emoji with ease!
@@ -121,6 +118,38 @@ export default class Utils {
 	 */
 	public formatString(str: string) {
 		return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
+	}
+
+	/**
+	 *
+	 * Converts a string to a date.
+	 * @param time The time to convert.
+	 * @example```ts
+	 * getDuration('1h');
+	 * ```
+	 */
+	public getDuration(time: string) {
+		return new Duration(time).fromNow || null;
+	}
+
+	/**
+	 *
+	 * Calculate expiry time
+	 * @param time Time to calculate.
+	 * @example```ts
+	 * Expire(new Date())
+	 * ```
+	 */
+	public Expire(time: Date) {
+		if (!isNaN(time.getTime()) && time.getTime() > Date.now()) {
+			return new Date(time);
+		} else {
+			return null;
+		}
+	}
+
+	public ms(value: StringValue, ) {
+		return ms(value);
 	}
 }
 
