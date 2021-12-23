@@ -1,4 +1,8 @@
-import { ApplicationCommandDataResolvable, Message } from 'discord.js';
+import {
+	ApplicationCommandDataResolvable,
+	Message,
+	SnowflakeUtil,
+} from 'discord.js';
 import { Dobro } from '../structures/Client';
 import { Duration } from '@sapphire/time-utilities';
 import ms, { StringValue } from 'ms';
@@ -148,8 +152,12 @@ export default class Utils {
 		}
 	}
 
-	public ms(value: StringValue, ) {
-		return ms(value);
+	public ms(value: any) {
+		return ms(value as StringValue);
+	}
+
+	public generateId() {
+		return SnowflakeUtil.generate().toString();
 	}
 }
 
