@@ -15,7 +15,7 @@ export default new SlashCommand({
 	options: [
 		{
 			name: 'target',
-			description: "The member who's avatar you want to view.",
+			description: "The user.",
 			type: 'USER',
 			required: false,
 		},

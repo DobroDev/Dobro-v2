@@ -3,7 +3,6 @@ import {
 	Message,
 	MessageActionRow,
 	MessageButton,
-	TextBasedChannels,
 	TextChannel,
 	User,
 } from 'discord.js';
@@ -47,7 +46,7 @@ export async function updateMeme({
 }: memeOptions) {
 	if (slash && interaction) {
 		interaction.editReply({
-			embeds: [await meme({ client: client, channel: interaction.channel })],
+			embeds: [await meme({ client: client, channel: interaction.channel as TextChannel })],
 		});
 
 		const collector = interaction.channel.createMessageComponentCollector({
@@ -92,7 +91,7 @@ export async function updateMeme({
 			}
 		});
 	} else {
-		m.edit({ embeds: [await meme({ client: client, channel: m.channel })] });
+		m.edit({ embeds: [await meme({ client: client, channel: m.channel as TextChannel })] });
 
 		const collector = m.channel.createMessageComponentCollector({
 			componentType: 'BUTTON',
@@ -135,7 +134,7 @@ export async function updateMeme({
 
 export interface createM {
 	client: Dobro;
-	channel: TextBasedChannels;
+	channel: TextChannel;
 }
 
 export interface memeOptions {
