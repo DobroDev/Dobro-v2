@@ -46,7 +46,7 @@ export default async (client: Dobro) => {
 			guildID: client.config.devServer,
 			reset: client.config.resetCmds,
 			dev: devCommands,
-			global: globalCommands,
+			global: client.config.dev ? [] : globalCommands,
 		});
 	});
 };
