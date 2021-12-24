@@ -19,7 +19,7 @@ export async function meme({ client, channel }: createM) {
 		);
 		const { data } = response;
 
-		if (data.nsfw && !(channel as TextChannel).nsfw) {
+		if (data.nsfw && !channel.nsfw) {
 			return globalErr(
 				'🔞 This post seems to be nsfw. Move to channel where NSFW is enabled.'
 			);

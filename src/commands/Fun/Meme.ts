@@ -1,4 +1,4 @@
-import { MessageActionRow, MessageButton } from 'discord.js';
+import { MessageActionRow, MessageButton, TextChannel } from 'discord.js';
 import { Command } from '../../lib/structures/Command';
 import { meme, updateMeme } from '../../lib/utils/memes';
 
@@ -22,7 +22,7 @@ export default new Command({
 		);
 
 		const m = await client.inlineReply(message, {
-			embed: await meme({ client: client, channel: message.channel }),
+			embed: await meme({ client: client, channel: message.channel as TextChannel }),
 			components: row,
 		});
 
