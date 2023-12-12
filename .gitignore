@@ -1,4 +1,7 @@
-node_modules
+node_modules/
 package-lock.json
+config.ts
 dist
-config.json
+.vscode
+.prettierrc
+.prettierignore

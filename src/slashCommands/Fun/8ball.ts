@@ -1,11 +1,11 @@
-import { slashCommand } from '../../structures';
+import { SlashCommand } from '../../lib/structures/SlashCommand';
 import axios from 'axios';
 
-export default new slashCommand({
+export default new SlashCommand({
 	name: '8ball',
-	description: 'Ask the 8ball about your future! (100% real!!)',
-	permsneeded: ['SEND_MESSAGES'],
-	Development: true,
+	description: 'Ask the 8ball about your future. (100% real!!)',
+	userPerms: ['SEND_MESSAGES'],
+	inDevelopment: true,
 	options: [
 		{
 			name: 'question',
@@ -14,15 +14,13 @@ export default new slashCommand({
 			required: true,
 		},
 	],
-	run: async ({ client, interaction, args }) => {
-		const { eightball } = client.config.FunCommands;
-		const { Embed } = client.utils;
+	run: async ({ client, interaction }) => {
 		const getQuestion = interaction.options.getString('question');
 
 		let question = getQuestion;
 
 		if (!question.includes('?')) {
-			question = question + '?';
+			question = `${getQuestion}?`;
 		}
 
 		try {
@@ -30,26 +28,18 @@ export default new slashCommand({
 				`https://8ball.delegator.com/magic/JSON/${encodeURIComponent(question)}`
 			);
 
-			await interaction.reply({
+			interaction.reply({
 				embeds: [
-					Embed({
+					client.embeds.create({
 						author: question,
 						icon: client.user.displayAvatarURL(),
-						description: eightball.embed.replace(
-							'(response)',
-							`${response.data.magic.answer}`
-						),
+						description: `:8ball: ${response.data.magic.answer}`,
 					}),
 				],
 			});
-		} catch (error) {
+		} catch (err) {
 			interaction.reply({
-				embeds: [
-					Embed({
-						presets: 'ERROR',
-						description: 'The api seems to be down :(',
-					}),
-				],
+				content: 'The api seems to be down :(',
 				ephemeral: true,
 			});
 		}
